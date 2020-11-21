@@ -1,0 +1,1953 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\setti\OneDrive\Desktop\PLFS\PLFS_1.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}18 Nov 2020, 00:50:08
+
+{com}. use "C:\Users\setti\OneDrive\Desktop\PLFS\personal2.dta", clear
+
+. drop max1 min1 voctest septrain persid
+
+. egen uniqid = concat( qtr vis fsu ssg sstr shnr sno)
+
+. destring uniqid, replace
+{txt}uniqid contains nonnumeric characters; no {res}replace
+
+{com}. drop uniqid
+
+. egen uniqid = concat(fsu ssg sstr shnr sno)
+
+. label variable uniqid "Personal Unique ID"
+
+. destring uniqid, replace
+{txt}uniqid has all characters numeric; {res}replaced {txt}as {res}double
+
+{com}. unique(uniqid)
+{txt}Number of unique values of uniqid is  {res}433339
+{txt}Number of records is  {res}433339
+
+{com}. set more off
+
+. gen icode2 = ic/1000
+{txt}(287826 missing values generated)
+
+{com}. recast int icode2, force
+{txt}icode2:  {res}145140{txt} values changed
+
+{com}. gen icode3 = ic/10
+{txt}(287826 missing values generated)
+
+{com}. recast int icode3, force
+{txt}icode3:  {res}125457{txt} values changed
+
+{com}. gen icode4  = ic/100
+{txt}(287826 missing values generated)
+
+{com}. recast int icode4, force
+{txt}icode4:  {res}137276{txt} values changed
+
+{com}. gen indus = 99
+
+. replace indus = . if(ic == .)
+{txt}(287826 real changes made, 287826 to missing)
+
+{com}. 
+. replace indus = 1 if(icode2== 51)
+{txt}(31 real changes made)
+
+{com}. 
+. replace indus = 2 if(icode2 == 1 | icode2 == 3 | icode2 == 10 | icode2 == 12)
+{txt}(53021 real changes made)
+
+{com}. 
+. replace indus = 3 if(icode2 == 23 | icode2 == 32 | icode2 == 15 | icode2 == 22 | icode2 == 31 | icode2 == 16 | icode2 == 18)
+{txt}(4889 real changes made)
+
+{com}. 
+. replace indus = 3 if(icode2 == 23 | icode2 == 32 | icode2 == 15 | icode2 == 22 | icode2 == 31 | icode2 == 16 | icode2 == 18)
+{txt}(0 real changes made)
+
+{com}. 
+. replace indus = 4 if(icode2 == 90)
+{txt}(365 real changes made)
+
+{com}. 
+. replace indus = 5 if(icode2 == 29 | icode2 == 30 | icode2 == 45)
+{txt}(2008 real changes made)
+
+{com}. 
+. replace indus = 6 if(ic == 96020 | ic == 96905)
+{txt}(826 real changes made)
+
+{com}. 
+. replace indus = 7 if(icode2 == 6 | icode2 == 19 | icode2 == 20)
+{txt}(578 real changes made)
+
+{com}. 
+. replace indus = 8 if(icode2 == 41 | icode2 == 42 | icode2 == 43)
+{txt}(16087 real changes made)
+
+{com}. 
+. replace indus = 9 if(icode2 == 26 | icode2 == 27 | ic == 33140 | icode4 == 351)
+{txt}(1530 real changes made)
+
+{com}. 
+. replace indus = 10 if(icode2 == 86 | icode2 == 87 | icode2 == 88 | icode2 == 75)
+{txt}(2663 real changes made)
+
+{com}. 
+. replace indus = 11 if(icode2 == 79 | icode2 == 55)
+{txt}(530 real changes made)
+
+{com}. 
+. replace indus = 12 if(icode2 == 8 | icode2 == 24 | icode2 == 5 | icode2 == 7 | icode2 == 9)
+{txt}(1357 real changes made)
+
+{com}. 
+. replace indus = 13 if(icode2 == 62 | icode2 == 63 | icode3 == 5820)
+{txt}(1005 real changes made)
+
+{com}. 
+. replace indus = 14 if(icode2 == 78 | icode2 == 84)
+{txt}(4338 real changes made)
+
+{com}. 
+. replace indus = 15 if(icode2 == 28)
+{txt}(433 real changes made)
+
+{com}. 
+. replace indus = 16 if(icode2 == 60 | icode2 == 92 | icode2 == 93 | icode3 == 5813 | icode3 == 7420)
+{txt}(421 real changes made)
+
+{com}. 
+. replace indus = 17 if(icode2 == 82 | icode2 == 94)
+{txt}(1904 real changes made)
+
+{com}. 
+. replace indus = 18 if(icode2 == 65 | icode2 == 80)
+{txt}(845 real changes made)
+
+{com}. 
+. replace indus = 19 if(icode2 == 61)
+{txt}(403 real changes made)
+
+{com}. 
+. replace indus = 20 if(icode2 == 13 | icode2 == 14)
+{txt}(5753 real changes made)
+
+{com}. 
+. replace indus = 21 if(icode2 == 85 | ic == 96907)
+{txt}(7690 real changes made)
+
+{com}. br indus ic icode2 icode3 icode4
+
+. nmissing
+
+{txt}ID{col 16}{res}433339
+{txt}qtr{col 16}{res}433339
+{txt}vis{col 16}{res}433339
+{txt}gedlvl{col 16}{res}    68
+{txt}cur_at{col 16}{res}205517
+{txt}voc{col 16}{res}118053
+{txt}voc365{col 16}{res}426578
+{txt}field{col 16}{res}426578
+{txt}dur{col 16}{res}426578
+{txt}type{col 16}{res}426578
+{txt}source{col 16}{res}426578
+{txt}ic{col 16}{res}287826
+{txt}oc{col 16}{res}287826
+{txt}ploc{col 16}{res}334289
+{txt}pentp{col 16}{res}334287
+{txt}pnwork{col 16}{res}334291
+{txt}pjc{col 16}{res}371696
+{txt}pepl{col 16}{res}371695
+{txt}pssb{col 16}{res}371695
+{txt}scode{col 16}{res}418883
+{txt}icode{col 16}{res}418883
+{txt}ocode{col 16}{res}418883
+{txt}sloc{col 16}{res}426268
+{txt}sentp{col 16}{res}426267
+{txt}snwork{col 16}{res}426268
+{txt}sjc{col 16}{res}429525
+{txt}sepl{col 16}{res}429525
+{txt}sssb{col 16}{res}429525
+{txt}ica17{col 16}{res}294436
+{txt}sca27{col 16}{res}432229
+{txt}ica27{col 16}{res}432229
+{txt}ica16{col 16}{res}295340
+{txt}sca26{col 16}{res}432218
+{txt}ica26{col 16}{res}432218
+{txt}ica15{col 16}{res}297355
+{txt}sca25{col 16}{res}432251
+{txt}ica25{col 16}{res}432251
+{txt}ica14{col 16}{res}299093
+{txt}sca24{col 16}{res}432276
+{txt}ica24{col 16}{res}432276
+{txt}ica13{col 16}{res}299926
+{txt}sca23{col 16}{res}432374
+{txt}ica23{col 16}{res}432374
+{txt}ica12{col 16}{res}299786
+{txt}sca22{col 16}{res}432387
+{txt}ica22{col 16}{res}432387
+{txt}ica11{col 16}{res}299817
+{txt}sca21{col 16}{res}432554
+{txt}ica21{col 16}{res}432554
+{txt}indcod{col 16}{res}290651
+{txt}occode{col 16}{res}291878
+{txt}icode2{col 16}{res}287826
+{txt}icode3{col 16}{res}287826
+{txt}icode4{col 16}{res}287826
+{txt}indus{col 16}{res}287826
+
+{com}. tab earwa1 voc
+{err}too many values
+{txt}{search r(134):r(134);}
+
+{com}. replace indus = 21 if(ic == 97005)
+{txt}(7 real changes made)
+
+{com}. replace indus = 18 if(ic == 97004)
+{txt}(81 real changes made)
+
+{com}. gen totwage = earwa1+ earwa2
+
+. br totwage earwa1 earwa2
+
+. br earwa1
+
+. gen voc1 = 0
+
+. replace voc1 = . if(voc == .)
+{txt}(118053 real changes made, 118053 to missing)
+
+{com}. replace voc1 = 1 if(voc == 1 | voc1 == 4)
+{txt}(6761 real changes made)
+
+{com}. replace voc1 = 2 if(voc == 2 | voc == 3 | voc == 5)
+{txt}(11126 real changes made)
+
+{com}. replace voc1 = 0 if(voc == 6)
+{txt}(0 real changes made)
+
+{com}. gen voc2 = 0
+
+. replace voc2 = . if(voc == .)
+{txt}(118053 real changes made, 118053 to missing)
+
+{com}. replace voc2 == 1 if(voc == 1 | voc == 4)
+{err}== invalid name
+{txt}{search r(198):r(198);}
+
+{com}. replace voc2 = 1 if(voc == 1 | voc == 4)
+{txt}(12994 real changes made)
+
+{com}. gen dur1 = .
+{txt}(433339 missing values generated)
+
+{com}. replace dur1 = 0 if(voc2 == 0)
+{txt}(302292 real changes made)
+
+{com}. drop dur1
+
+. gen dur1 = .
+{txt}(433339 missing values generated)
+
+{com}. replace dur1 = 0 if(voc1 == 0)
+{txt}(297399 real changes made)
+
+{com}. replace dur1 = dur if(voc1 > 0)
+{txt}(6761 real changes made)
+
+{com}. gen dur2 = .
+{txt}(433339 missing values generated)
+
+{com}. replace dur2 = 0 if(voc2 == 0)
+{txt}(302292 real changes made)
+
+{com}. replace dur2 = dur if(voc1 == 1)
+{txt}(6761 real changes made)
+
+{com}. drop dur2
+
+. gen dur2 = .
+{txt}(433339 missing values generated)
+
+{com}. replace dur2 = 0 if(voc2 == 0)
+{txt}(302292 real changes made)
+
+{com}. replace dur2 = dur if(voc2 == 1)
+{txt}(6761 real changes made)
+
+{com}. gen septrain = 0
+
+. replace septrain = . if(type == .)
+{txt}(426578 real changes made, 426578 to missing)
+
+{com}. replace septrain = 1 if(type == 2 | type == 3)
+{txt}(6323 real changes made)
+
+{com}. gen lgwage = log(totwage)
+{txt}(333862 missing values generated)
+
+{com}. reg totwage voc2 dur2 sex age marit gedlvl tedlvl y_edu voc365
+{txt}note: voc2 omitted because of collinearity
+
+      Source {c |}       SS       df       MS              Number of obs ={res}    6761
+{txt}{hline 13}{char +}{hline 30}           F(  8,  6752) ={res}  269.59
+    {txt}   Model {char |} {res} 5.5718e+11     8  6.9648e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.7443e+12  6752   258345582           {txt}R-squared     = {res} 0.2421
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2412
+    {txt}   Total {char |} {res} 2.3015e+12  6760   340463057           {txt}Root MSE      = {res}  16073
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 8}dur2 {c |}{col 14}{res}{space 2} 289.6328{col 26}{space 2} 134.6418{col 37}{space 1}    2.15{col 46}{space 3}0.032{col 54}{space 4} 25.69248{col 67}{space 3} 553.5731
+{txt}{space 9}sex {c |}{col 14}{res}{space 2}-6907.418{col 26}{space 2} 417.1885{col 37}{space 1}  -16.56{col 46}{space 3}0.000{col 54}{space 4}-7725.239{col 67}{space 3}-6089.597
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 674.7173{col 26}{space 2} 25.77794{col 37}{space 1}   26.17{col 46}{space 3}0.000{col 54}{space 4} 624.1844{col 67}{space 3} 725.2502
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} 1460.109{col 26}{space 2} 465.5479{col 37}{space 1}    3.14{col 46}{space 3}0.002{col 54}{space 4} 547.4883{col 67}{space 3}  2372.73
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-308.9618{col 26}{space 2} 255.0663{col 37}{space 1}   -1.21{col 46}{space 3}0.226{col 54}{space 4}-808.9722{col 67}{space 3} 191.0485
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 164.7171{col 26}{space 2} 48.80514{col 37}{space 1}    3.37{col 46}{space 3}0.001{col 54}{space 4} 69.04367{col 67}{space 3} 260.3906
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1234.568{col 26}{space 2} 156.7066{col 37}{space 1}    7.88{col 46}{space 3}0.000{col 54}{space 4}  927.374{col 67}{space 3} 1541.763
+{txt}{space 6}voc365 {c |}{col 14}{res}{space 2}-518.2089{col 26}{space 2}  463.752{col 37}{space 1}   -1.12{col 46}{space 3}0.264{col 54}{space 4}-1427.309{col 67}{space 3} 390.8912
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-17961.98{col 26}{space 2} 1668.305{col 37}{space 1}  -10.77{col 46}{space 3}0.000{col 54}{space 4}-21232.38{col 67}{space 3}-14691.58
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2 dur2 i.sex age marit gedlvl tedlvl y_edu voc365
+{p 0 6 2}{txt}note: voc2 omitted because of collinearity{p_end}
+
+      Source {c |}       SS       df       MS              Number of obs ={res}    6761
+{txt}{hline 13}{char +}{hline 30}           F(  8,  6752) ={res}  269.59
+    {txt}   Model {char |} {res} 5.5718e+11     8  6.9648e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.7443e+12  6752   258345582           {txt}R-squared     = {res} 0.2421
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2412
+    {txt}   Total {char |} {res} 2.3015e+12  6760   340463057           {txt}Root MSE      = {res}  16073
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 8}dur2 {c |}{col 14}{res}{space 2} 289.6328{col 26}{space 2} 134.6418{col 37}{space 1}    2.15{col 46}{space 3}0.032{col 54}{space 4} 25.69248{col 67}{space 3} 553.5731
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-6907.418{col 26}{space 2} 417.1885{col 37}{space 1}  -16.56{col 46}{space 3}0.000{col 54}{space 4}-7725.239{col 67}{space 3}-6089.597
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 674.7173{col 26}{space 2} 25.77794{col 37}{space 1}   26.17{col 46}{space 3}0.000{col 54}{space 4} 624.1844{col 67}{space 3} 725.2502
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} 1460.109{col 26}{space 2} 465.5479{col 37}{space 1}    3.14{col 46}{space 3}0.002{col 54}{space 4} 547.4883{col 67}{space 3}  2372.73
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-308.9618{col 26}{space 2} 255.0663{col 37}{space 1}   -1.21{col 46}{space 3}0.226{col 54}{space 4}-808.9722{col 67}{space 3} 191.0485
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 164.7171{col 26}{space 2} 48.80514{col 37}{space 1}    3.37{col 46}{space 3}0.001{col 54}{space 4} 69.04367{col 67}{space 3} 260.3906
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1234.568{col 26}{space 2} 156.7066{col 37}{space 1}    7.88{col 46}{space 3}0.000{col 54}{space 4}  927.374{col 67}{space 3} 1541.763
+{txt}{space 6}voc365 {c |}{col 14}{res}{space 2}-518.2089{col 26}{space 2}  463.752{col 37}{space 1}   -1.12{col 46}{space 3}0.264{col 54}{space 4}-1427.309{col 67}{space 3} 390.8912
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} -24869.4{col 26}{space 2} 1552.687{col 37}{space 1}  -16.02{col 46}{space 3}0.000{col 54}{space 4}-27913.15{col 67}{space 3}-21825.64
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. sum sex
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 9}sex {c |}{res}    433339    1.488419    .5001203          1          3
+
+{com}. desc sex
+
+              {txt}storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:sex            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Sex{p_end}
+
+{com}. tab sex
+
+        {txt}Sex {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}    221,743       51.17       51.17
+{txt}          2 {c |}{res}    211,541       48.82       99.99
+{txt}          3 {c |}{res}         55        0.01      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    433,339      100.00
+
+{com}. reg totwage voc2 i.sex age marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  8,315277) ={res}15115.98
+    {txt}   Model {char |} {res} 7.2023e+12     8  9.0029e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8778e+13315277  59559015.9           {txt}R-squared     = {res} 0.2772
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2772
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7717.4
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2000.164{col 26}{space 2} 71.96128{col 37}{space 1}   27.80{col 46}{space 3}0.000{col 54}{space 4} 1859.122{col 67}{space 3} 2141.206
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-5018.151{col 26}{space 2} 28.56826{col 37}{space 1} -175.65{col 46}{space 3}0.000{col 54}{space 4}-5074.144{col 67}{space 3}-4962.158
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2597.708{col 26}{space 2} 1205.429{col 37}{space 1}   -2.16{col 46}{space 3}0.031{col 54}{space 4}-4960.315{col 67}{space 3}-235.1007
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 202.7108{col 26}{space 2}  1.52707{col 37}{space 1}  132.74{col 46}{space 3}0.000{col 54}{space 4} 199.7178{col 67}{space 3} 205.7038
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} 1614.231{col 26}{space 2}  36.1957{col 37}{space 1}   44.60{col 46}{space 3}0.000{col 54}{space 4} 1543.289{col 67}{space 3} 1685.174
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 123.0441{col 26}{space 2} 19.48591{col 37}{space 1}    6.31{col 46}{space 3}0.000{col 54}{space 4} 84.85232{col 67}{space 3}  161.236
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 566.5812{col 26}{space 2} 10.24435{col 37}{space 1}   55.31{col 46}{space 3}0.000{col 54}{space 4} 546.5026{col 67}{space 3} 586.6598
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 454.5433{col 26}{space 2} 13.29052{col 37}{space 1}   34.20{col 46}{space 3}0.000{col 54}{space 4} 428.4942{col 67}{space 3} 480.5923
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-8165.944{col 26}{space 2} 65.75517{col 37}{space 1} -124.19{col 46}{space 3}0.000{col 54}{space 4}-8294.823{col 67}{space 3}-8037.066
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2 i.sex age marit gedlvl tedlvl y_edu dur2
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  309053
+{txt}{hline 13}{char +}{hline 30}           F(  9,309043) ={res}12945.88
+    {txt}   Model {char |} {res} 6.7795e+12     9  7.5327e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.7982e+13309043  58186352.8           {txt}R-squared     = {res} 0.2738
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2738
+    {txt}   Total {char |} {res} 2.4762e+13309052  80120976.3           {txt}Root MSE      = {res}   7628
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2}-583.7403{col 26}{space 2} 244.1324{col 37}{space 1}   -2.39{col 46}{space 3}0.017{col 54}{space 4}-1062.233{col 67}{space 3}-105.2477
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-5025.712{col 26}{space 2} 28.49749{col 37}{space 1} -176.36{col 46}{space 3}0.000{col 54}{space 4}-5081.566{col 67}{space 3}-4969.858
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2441.352{col 26}{space 2} 1221.627{col 37}{space 1}   -2.00{col 46}{space 3}0.046{col 54}{space 4}-4835.707{col 67}{space 3} -46.9973
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 199.7354{col 26}{space 2} 1.524938{col 37}{space 1}  130.98{col 46}{space 3}0.000{col 54}{space 4} 196.7465{col 67}{space 3} 202.7242
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} 1631.186{col 26}{space 2} 36.19301{col 37}{space 1}   45.07{col 46}{space 3}0.000{col 54}{space 4} 1560.248{col 67}{space 3} 1702.123
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 131.0744{col 26}{space 2} 19.45656{col 37}{space 1}    6.74{col 46}{space 3}0.000{col 54}{space 4} 92.94004{col 67}{space 3} 169.2087
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 560.2448{col 26}{space 2} 10.68115{col 37}{space 1}   52.45{col 46}{space 3}0.000{col 54}{space 4}   539.31{col 67}{space 3} 581.1795
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 439.2038{col 26}{space 2}  13.2746{col 37}{space 1}   33.09{col 46}{space 3}0.000{col 54}{space 4} 413.1859{col 67}{space 3} 465.2216
+{txt}{space 8}dur2 {c |}{col 14}{res}{space 2} 500.4425{col 26}{space 2} 59.12013{col 37}{space 1}    8.46{col 46}{space 3}0.000{col 54}{space 4} 384.5687{col 67}{space 3} 616.3162
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-8019.753{col 26}{space 2} 65.67791{col 37}{space 1} -122.11{col 46}{space 3}0.000{col 54}{space 4}-8148.479{col 67}{space 3}-7891.026
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 8}voc2 {c |} {res}     6.77    0.147627
+{txt}{space 9}sex {c |}
+{space 10}2  {c |} {res}     1.08    0.927356
+{txt}{space 10}3  {c |} {res}     1.00    0.999848
+{txt}{space 9}age {c |} {res}     2.12    0.471786
+{txt}{space 7}marit {c |} {res}     2.14    0.466464
+{txt}{space 6}gedlvl {c |} {res}    20.85    0.047956
+{txt}{space 6}tedlvl {c |} {res}     1.20    0.830970
+{txt}{space 7}y_edu {c |} {res}    21.08    0.047434
+{txt}{space 8}dur2 {c |} {res}     6.94    0.144060
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     7.02
+
+{com}. gen age2 = age*age
+
+. reg totwage voc2 i.sex age age2 marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  9,315276) ={res}13437.49
+    {txt}   Model {char |} {res} 7.2028e+12     9  8.0031e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8777e+13315276  59557846.7           {txt}R-squared     = {res} 0.2772
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2772
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7717.4
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2009.587{col 26}{space 2} 72.04634{col 37}{space 1}   27.89{col 46}{space 3}0.000{col 54}{space 4} 1868.379{col 67}{space 3} 2150.796
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-5020.152{col 26}{space 2} 28.57772{col 37}{space 1} -175.67{col 46}{space 3}0.000{col 54}{space 4}-5076.164{col 67}{space 3}-4964.141
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2584.578{col 26}{space 2} 1205.427{col 37}{space 1}   -2.14{col 46}{space 3}0.032{col 54}{space 4}-4947.182{col 67}{space 3} -221.975
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 184.1837{col 26}{space 2} 7.076524{col 37}{space 1}   26.03{col 46}{space 3}0.000{col 54}{space 4}  170.314{col 67}{space 3} 198.0535
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2} .2596732{col 26}{space 2} .0968469{col 37}{space 1}    2.68{col 46}{space 3}0.007{col 54}{space 4} .0698559{col 67}{space 3} .4494905
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} 1656.931{col 26}{space 2} 39.54392{col 37}{space 1}   41.90{col 46}{space 3}0.000{col 54}{space 4} 1579.427{col 67}{space 3} 1734.436
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 122.8264{col 26}{space 2} 19.48588{col 37}{space 1}    6.30{col 46}{space 3}0.000{col 54}{space 4} 84.63466{col 67}{space 3} 161.0182
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 567.2466{col 26}{space 2} 10.24725{col 37}{space 1}   55.36{col 46}{space 3}0.000{col 54}{space 4} 547.1623{col 67}{space 3}  587.331
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2}  456.471{col 26}{space 2} 13.30983{col 37}{space 1}   34.30{col 46}{space 3}0.000{col 54}{space 4} 430.3842{col 67}{space 3} 482.5579
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-7969.818{col 26}{space 2} 98.35698{col 37}{space 1}  -81.03{col 46}{space 3}0.000{col 54}{space 4}-8162.595{col 67}{space 3}-7777.041
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2 i.sex age age2 marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  9,315276) ={res}13437.49
+    {txt}   Model {char |} {res} 7.2028e+12     9  8.0031e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8777e+13315276  59557846.7           {txt}R-squared     = {res} 0.2772
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2772
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7717.4
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2009.587{col 26}{space 2} 72.04634{col 37}{space 1}   27.89{col 46}{space 3}0.000{col 54}{space 4} 1868.379{col 67}{space 3} 2150.796
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-5020.152{col 26}{space 2} 28.57772{col 37}{space 1} -175.67{col 46}{space 3}0.000{col 54}{space 4}-5076.164{col 67}{space 3}-4964.141
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2584.578{col 26}{space 2} 1205.427{col 37}{space 1}   -2.14{col 46}{space 3}0.032{col 54}{space 4}-4947.182{col 67}{space 3} -221.975
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 184.1837{col 26}{space 2} 7.076524{col 37}{space 1}   26.03{col 46}{space 3}0.000{col 54}{space 4}  170.314{col 67}{space 3} 198.0535
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2} .2596732{col 26}{space 2} .0968469{col 37}{space 1}    2.68{col 46}{space 3}0.007{col 54}{space 4} .0698559{col 67}{space 3} .4494905
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} 1656.931{col 26}{space 2} 39.54392{col 37}{space 1}   41.90{col 46}{space 3}0.000{col 54}{space 4} 1579.427{col 67}{space 3} 1734.436
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 122.8264{col 26}{space 2} 19.48588{col 37}{space 1}    6.30{col 46}{space 3}0.000{col 54}{space 4} 84.63466{col 67}{space 3} 161.0182
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 567.2466{col 26}{space 2} 10.24725{col 37}{space 1}   55.36{col 46}{space 3}0.000{col 54}{space 4} 547.1623{col 67}{space 3}  587.331
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2}  456.471{col 26}{space 2} 13.30983{col 37}{space 1}   34.30{col 46}{space 3}0.000{col 54}{space 4} 430.3842{col 67}{space 3} 482.5579
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-7969.818{col 26}{space 2} 98.35698{col 37}{space 1}  -81.03{col 46}{space 3}0.000{col 54}{space 4}-8162.595{col 67}{space 3}-7777.041
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2 i.sex age age2 gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  8,315277) ={res}14815.26
+    {txt}   Model {char |} {res} 7.0982e+12     8  8.8728e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8882e+13315277  59889320.4           {txt}R-squared     = {res} 0.2732
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2732
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7738.8
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2005.015{col 26}{space 2} 72.24647{col 37}{space 1}   27.75{col 46}{space 3}0.000{col 54}{space 4} 1863.414{col 67}{space 3} 2146.616
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-4778.653{col 26}{space 2} 28.06827{col 37}{space 1} -170.25{col 46}{space 3}0.000{col 54}{space 4}-4833.666{col 67}{space 3} -4723.64
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2738.461{col 26}{space 2} 1208.772{col 37}{space 1}   -2.27{col 46}{space 3}0.023{col 54}{space 4}-5107.619{col 67}{space 3}-369.3029
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 341.5677{col 26}{space 2} 6.014083{col 37}{space 1}   56.79{col 46}{space 3}0.000{col 54}{space 4} 329.7803{col 67}{space 3} 353.3551
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-1.374589{col 26}{space 2} .0888923{col 37}{space 1}  -15.46{col 46}{space 3}0.000{col 54}{space 4}-1.548815{col 67}{space 3}-1.200362
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 152.4675{col 26}{space 2} 19.52715{col 37}{space 1}    7.81{col 46}{space 3}0.000{col 54}{space 4} 114.1949{col 67}{space 3} 190.7402
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 560.6582{col 26}{space 2} 10.27452{col 37}{space 1}   54.57{col 46}{space 3}0.000{col 54}{space 4} 540.5205{col 67}{space 3}  580.796
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 417.9441{col 26}{space 2} 13.31493{col 37}{space 1}   31.39{col 46}{space 3}0.000{col 54}{space 4} 391.8473{col 67}{space 3}  444.041
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-8279.473{col 26}{space 2}  98.3515{col 37}{space 1}  -84.18{col 46}{space 3}0.000{col 54}{space 4}-8472.239{col 67}{space 3}-8086.707
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 8}voc2 {c |} {res}     1.09    0.920982
+{txt}{space 9}sex {c |}
+{space 10}2  {c |} {res}     1.04    0.964757
+{txt}{space 10}3  {c |} {res}     1.00    0.999847
+{txt}{space 9}age {c |} {res}    32.54    0.030732
+{txt}{space 8}age2 {c |} {res}    33.01    0.030297
+{txt}{space 6}gedlvl {c |} {res}    20.79    0.048102
+{txt}{space 6}tedlvl {c |} {res}     1.12    0.893097
+{txt}{space 7}y_edu {c |} {res}    21.01    0.047607
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}    13.95
+
+{com}. reg totwage voc2 i.sex age gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  7,315278) ={res}16884.81
+    {txt}   Model {char |} {res} 7.0839e+12     7  1.0120e+12           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8896e+13315278  59934553.1           {txt}R-squared     = {res} 0.2727
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2727
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7741.7
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2063.808{col 26}{space 2}  72.1736{col 37}{space 1}   28.60{col 46}{space 3}0.000{col 54}{space 4}  1922.35{col 67}{space 3} 2205.266
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-4751.974{col 26}{space 2} 28.02578{col 37}{space 1} -169.56{col 46}{space 3}0.000{col 54}{space 4}-4806.903{col 67}{space 3}-4697.044
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2680.562{col 26}{space 2} 1209.222{col 37}{space 1}   -2.22{col 46}{space 3}0.027{col 54}{space 4}-5050.603{col 67}{space 3}-310.5211
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 250.1347{col 26}{space 2} 1.099427{col 37}{space 1}  227.51{col 46}{space 3}0.000{col 54}{space 4} 247.9799{col 67}{space 3} 252.2896
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 155.9184{col 26}{space 2} 19.53325{col 37}{space 1}    7.98{col 46}{space 3}0.000{col 54}{space 4} 117.6337{col 67}{space 3}  194.203
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 563.7899{col 26}{space 2}  10.2764{col 37}{space 1}   54.86{col 46}{space 3}0.000{col 54}{space 4} 543.6485{col 67}{space 3} 583.9314
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 423.8511{col 26}{space 2} 13.31447{col 37}{space 1}   31.83{col 46}{space 3}0.000{col 54}{space 4} 397.7551{col 67}{space 3} 449.9471
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} -7090.71{col 26}{space 2} 61.36819{col 37}{space 1} -115.54{col 46}{space 3}0.000{col 54}{space 4} -7210.99{col 67}{space 3} -6970.43
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 8}voc2 {c |} {res}     1.08    0.923540
+{txt}{space 9}sex {c |}
+{space 10}2  {c |} {res}     1.03    0.968416
+{txt}{space 10}3  {c |} {res}     1.00    0.999857
+{txt}{space 9}age {c |} {res}     1.09    0.920284
+{txt}{space 6}gedlvl {c |} {res}    20.79    0.048109
+{txt}{space 6}tedlvl {c |} {res}     1.12    0.893444
+{txt}{space 7}y_edu {c |} {res}    20.99    0.047646
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     6.73
+
+{com}. reg totwage voc2 i.sex age gedlvl tedlvl y_edu septrain
+{p 0 6 2}{txt}note: voc2 omitted because of collinearity{p_end}
+
+      Source {c |}       SS       df       MS              Number of obs ={res}    6761
+{txt}{hline 13}{char +}{hline 30}           F(  6,  6754) ={res}  364.43
+    {txt}   Model {char |} {res} 5.6288e+11     6  9.3813e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.7387e+12  6754   257425545           {txt}R-squared     = {res} 0.2446
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2439
+    {txt}   Total {char |} {res} 2.3015e+12  6760   340463057           {txt}Root MSE      = {res}  16044
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 7}2.sex {c |}{col 14}{res}{space 2}-6592.184{col 26}{space 2} 396.8422{col 37}{space 1}  -16.61{col 46}{space 3}0.000{col 54}{space 4} -7370.12{col 67}{space 3}-5814.248
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 707.5458{col 26}{space 2} 20.01388{col 37}{space 1}   35.35{col 46}{space 3}0.000{col 54}{space 4} 668.3123{col 67}{space 3} 746.7793
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-344.5713{col 26}{space 2} 254.2295{col 37}{space 1}   -1.36{col 46}{space 3}0.175{col 54}{space 4}-842.9413{col 67}{space 3} 153.7986
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 214.8671{col 26}{space 2} 47.21029{col 37}{space 1}    4.55{col 46}{space 3}0.000{col 54}{space 4} 122.3201{col 67}{space 3} 307.4142
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1269.093{col 26}{space 2}  155.313{col 37}{space 1}    8.17{col 46}{space 3}0.000{col 54}{space 4} 964.6301{col 67}{space 3} 1573.555
+{txt}{space 4}septrain {c |}{col 14}{res}{space 2}-4908.402{col 26}{space 2} 802.4478{col 37}{space 1}   -6.12{col 46}{space 3}0.000{col 54}{space 4}-6481.452{col 67}{space 3}-3335.351
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-19208.26{col 26}{space 2} 1578.526{col 37}{space 1}  -12.17{col 46}{space 3}0.000{col 54}{space 4}-22302.67{col 67}{space 3}-16113.85
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage i.sex age gedlvl tedlvl y_edu septrain
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    6761
+{txt}{hline 13}{char +}{hline 30}           F(  6,  6754) ={res}  364.43
+    {txt}   Model {char |} {res} 5.6288e+11     6  9.3813e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.7387e+12  6754   257425545           {txt}R-squared     = {res} 0.2446
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2439
+    {txt}   Total {char |} {res} 2.3015e+12  6760   340463057           {txt}Root MSE      = {res}  16044
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}2.sex {c |}{col 14}{res}{space 2}-6592.184{col 26}{space 2} 396.8422{col 37}{space 1}  -16.61{col 46}{space 3}0.000{col 54}{space 4} -7370.12{col 67}{space 3}-5814.248
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 707.5458{col 26}{space 2} 20.01388{col 37}{space 1}   35.35{col 46}{space 3}0.000{col 54}{space 4} 668.3123{col 67}{space 3} 746.7793
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-344.5713{col 26}{space 2} 254.2295{col 37}{space 1}   -1.36{col 46}{space 3}0.175{col 54}{space 4}-842.9413{col 67}{space 3} 153.7986
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 214.8671{col 26}{space 2} 47.21029{col 37}{space 1}    4.55{col 46}{space 3}0.000{col 54}{space 4} 122.3201{col 67}{space 3} 307.4142
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1269.093{col 26}{space 2}  155.313{col 37}{space 1}    8.17{col 46}{space 3}0.000{col 54}{space 4} 964.6301{col 67}{space 3} 1573.555
+{txt}{space 4}septrain {c |}{col 14}{res}{space 2}-4908.402{col 26}{space 2} 802.4478{col 37}{space 1}   -6.12{col 46}{space 3}0.000{col 54}{space 4}-6481.452{col 67}{space 3}-3335.351
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-19208.26{col 26}{space 2} 1578.526{col 37}{space 1}  -12.17{col 46}{space 3}0.000{col 54}{space 4}-22302.67{col 67}{space 3}-16113.85
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage septrain i.sex age gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    6761
+{txt}{hline 13}{char +}{hline 30}           F(  6,  6754) ={res}  364.43
+    {txt}   Model {char |} {res} 5.6288e+11     6  9.3813e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.7387e+12  6754   257425545           {txt}R-squared     = {res} 0.2446
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2439
+    {txt}   Total {char |} {res} 2.3015e+12  6760   340463057           {txt}Root MSE      = {res}  16044
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}septrain {c |}{col 14}{res}{space 2}-4908.402{col 26}{space 2} 802.4478{col 37}{space 1}   -6.12{col 46}{space 3}0.000{col 54}{space 4}-6481.452{col 67}{space 3}-3335.351
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-6592.184{col 26}{space 2} 396.8422{col 37}{space 1}  -16.61{col 46}{space 3}0.000{col 54}{space 4} -7370.12{col 67}{space 3}-5814.248
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 707.5458{col 26}{space 2} 20.01388{col 37}{space 1}   35.35{col 46}{space 3}0.000{col 54}{space 4} 668.3123{col 67}{space 3} 746.7793
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-344.5713{col 26}{space 2} 254.2295{col 37}{space 1}   -1.36{col 46}{space 3}0.175{col 54}{space 4}-842.9413{col 67}{space 3} 153.7986
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 214.8671{col 26}{space 2} 47.21029{col 37}{space 1}    4.55{col 46}{space 3}0.000{col 54}{space 4} 122.3201{col 67}{space 3} 307.4142
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1269.093{col 26}{space 2}  155.313{col 37}{space 1}    8.17{col 46}{space 3}0.000{col 54}{space 4} 964.6301{col 67}{space 3} 1573.555
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-19208.26{col 26}{space 2} 1578.526{col 37}{space 1}  -12.17{col 46}{space 3}0.000{col 54}{space 4}-22302.67{col 67}{space 3}-16113.85
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2  subs y_edu tedlvl gedlvl sex age
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  7,315278) ={res}16969.04
+    {txt}   Model {char |} {res} 7.1096e+12     7  1.0157e+12           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8870e+13315278    59853139           {txt}R-squared     = {res} 0.2737
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2736
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7736.5
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2125.061{col 26}{space 2} 72.17883{col 37}{space 1}   29.44{col 46}{space 3}0.000{col 54}{space 4} 1983.592{col 67}{space 3} 2266.529
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} 1470.489{col 26}{space 2} 68.50973{col 37}{space 1}   21.46{col 46}{space 3}0.000{col 54}{space 4} 1336.212{col 67}{space 3} 1604.766
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 424.0325{col 26}{space 2} 13.30538{col 37}{space 1}   31.87{col 46}{space 3}0.000{col 54}{space 4} 397.9544{col 67}{space 3} 450.1107
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 564.0034{col 26}{space 2} 10.26942{col 37}{space 1}   54.92{col 46}{space 3}0.000{col 54}{space 4} 543.8756{col 67}{space 3} 584.1311
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}  149.598{col 26}{space 2} 19.52207{col 37}{space 1}    7.66{col 46}{space 3}0.000{col 54}{space 4} 111.3353{col 67}{space 3} 187.8607
+{txt}{space 9}sex {c |}{col 14}{res}{space 2}-4771.657{col 26}{space 2}  28.0144{col 37}{space 1} -170.33{col 46}{space 3}0.000{col 54}{space 4}-4826.565{col 67}{space 3} -4716.75
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 251.7854{col 26}{space 2} 1.101326{col 37}{space 1}  228.62{col 46}{space 3}0.000{col 54}{space 4} 249.6268{col 67}{space 3}  253.944
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-5198.062{col 26}{space 2} 152.5028{col 37}{space 1}  -34.09{col 46}{space 3}0.000{col 54}{space 4}-5496.963{col 67}{space 3} -4899.16
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2  subs y_edu tedlvl gedlvl i.sex age
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  315286
+{txt}{hline 13}{char +}{hline 30}           F(  8,315277) ={res}14853.47
+    {txt}   Model {char |} {res} 7.1115e+12     8  8.8894e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8868e+13315277  59847147.3           {txt}R-squared     = {res} 0.2737
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2737
+    {txt}   Total {char |} {res} 2.5980e+13315285  82401419.3           {txt}Root MSE      = {res} 7736.1
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 2124.044{col 26}{space 2} 72.17544{col 37}{space 1}   29.43{col 46}{space 3}0.000{col 54}{space 4} 1982.582{col 67}{space 3} 2265.505
+{txt}{space 8}subs {c |}{col 14}{res}{space 2}  1471.63{col 26}{space 2} 68.50659{col 37}{space 1}   21.48{col 46}{space 3}0.000{col 54}{space 4} 1337.359{col 67}{space 3} 1605.901
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 423.8471{col 26}{space 2} 13.30476{col 37}{space 1}   31.86{col 46}{space 3}0.000{col 54}{space 4} 397.7701{col 67}{space 3}  449.924
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  564.067{col 26}{space 2} 10.26892{col 37}{space 1}   54.93{col 46}{space 3}0.000{col 54}{space 4} 543.9402{col 67}{space 3} 584.1938
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}  149.755{col 26}{space 2} 19.52111{col 37}{space 1}    7.67{col 46}{space 3}0.000{col 54}{space 4} 111.4942{col 67}{space 3} 188.0158
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-4777.226{col 26}{space 2} 28.02999{col 37}{space 1} -170.43{col 46}{space 3}0.000{col 54}{space 4}-4832.164{col 67}{space 3}-4722.288
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2655.281{col 26}{space 2} 1208.341{col 37}{space 1}   -2.20{col 46}{space 3}0.028{col 54}{space 4}-5023.594{col 67}{space 3}-286.9675
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 251.7741{col 26}{space 2} 1.101273{col 37}{space 1}  228.62{col 46}{space 3}0.000{col 54}{space 4} 249.6156{col 67}{space 3} 253.9325
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} -9969.36{col 26}{space 2} 147.3704{col 37}{space 1}  -67.65{col 46}{space 3}0.000{col 54}{space 4} -10258.2{col 67}{space 3}-9680.518
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 8}voc2 {c |} {res}     1.08    0.922146
+{txt}{space 8}subs {c |} {res}     1.01    0.985942
+{txt}{space 7}y_edu {c |} {res}    20.99    0.047646
+{txt}{space 6}tedlvl {c |} {res}     1.12    0.893443
+{txt}{space 6}gedlvl {c |} {res}    20.79    0.048098
+{txt}{space 9}sex {c |}
+{space 10}2  {c |} {res}     1.03    0.966712
+{txt}{space 10}3  {c |} {res}     1.00    0.999856
+{txt}{space 9}age {c |} {res}     1.09    0.915865
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     6.02
+
+{com}. reg lgwage voc2  subs y_edu tedlvl gedlvl i.sex age
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   91291
+{txt}{hline 13}{char +}{hline 30}           F(  8, 91282) ={res} 4789.13
+    {txt}   Model {char |} {res} 18055.3069     8  2256.91336           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 43017.2879 91282   .47125707           {txt}R-squared     = {res} 0.2956
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2956
+    {txt}   Total {char |} {res} 61072.5948 91290  .668995451           {txt}Root MSE      = {res} .68648
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} .0223001{col 26}{space 2} .0083889{col 37}{space 1}    2.66{col 46}{space 3}0.008{col 54}{space 4} .0058579{col 67}{space 3} .0387422
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4276584{col 26}{space 2} .0095899{col 37}{space 1}   44.59{col 46}{space 3}0.000{col 54}{space 4} .4088624{col 67}{space 3} .4464545
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2}  .056904{col 26}{space 2} .0021823{col 37}{space 1}   26.08{col 46}{space 3}0.000{col 54}{space 4} .0526268{col 67}{space 3} .0611812
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0296128{col 26}{space 2} .0012198{col 37}{space 1}   24.28{col 46}{space 3}0.000{col 54}{space 4} .0272219{col 67}{space 3} .0320036
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0167045{col 26}{space 2} .0032227{col 37}{space 1}    5.18{col 46}{space 3}0.000{col 54}{space 4}  .010388{col 67}{space 3}  .023021
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.5428305{col 26}{space 2} .0060043{col 37}{space 1}  -90.41{col 46}{space 3}0.000{col 54}{space 4}-.5545988{col 67}{space 3}-.5310623
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-.1881361{col 26}{space 2} .1904143{col 37}{space 1}   -0.99{col 46}{space 3}0.323{col 54}{space 4}-.5613462{col 67}{space 3}  .185074
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} .0184861{col 26}{space 2} .0002254{col 37}{space 1}   82.00{col 46}{space 3}0.000{col 54}{space 4} .0180442{col 67}{space 3} .0189279
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.037996{col 26}{space 2} .0220918{col 37}{space 1}  318.58{col 46}{space 3}0.000{col 54}{space 4} 6.994697{col 67}{space 3} 7.081296
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 8}voc2 {c |} {res}     1.07    0.937428
+{txt}{space 8}subs {c |} {res}     1.01    0.990744
+{txt}{space 7}y_edu {c |} {res}    22.49    0.044459
+{txt}{space 6}tedlvl {c |} {res}     1.13    0.883292
+{txt}{space 6}gedlvl {c |} {res}    22.29    0.044857
+{txt}{space 9}sex {c |}
+{space 10}2  {c |} {res}     1.01    0.990859
+{txt}{space 10}3  {c |} {res}     1.00    0.999948
+{txt}{space 9}age {c |} {res}     1.07    0.935763
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     6.38
+
+{com}. estat hettest
+
+{txt}Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+{p 9 20}Variables: fitted values of lgwage
+
+{col 10}chi2({res}1{txt}){col 23}={res}   108.52
+{txt}{col 10}Prob > chi2{col 23}={res}   0.0000
+
+{com}. gen field_job = 0
+
+. replace field_job = . if(field == . | indus == .)
+{txt}(429640 real changes made, 429640 to missing)
+
+{com}. replace field_job = 1 if(field == indus)
+{txt}(285776 real changes made)
+
+{com}. drop field_job
+
+. gen field_job = 0
+
+. replace field_job = . if(field == . | indus == .)
+{txt}(429640 real changes made, 429640 to missing)
+
+{com}. replace field_job = 1 if(field == indus & (field != . & indus != .))
+{txt}(1012 real changes made)
+
+{com}. egen cnt1 = total(field == indus & field != . & indus != .)
+
+. egen cnt2 = total(field != . & indus != .)
+
+. gen rat = cnt1/cnt2
+
+. tab rat
+
+        {txt}rat {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+   .2735875 {c |}{res}    433,339      100.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    433,339      100.00
+
+{com}. reg totwage voc2  subs y_edu tedlvl gedlvl i.sex age i.dur1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}  304160
+{txt}{hline 13}{char +}{hline 30}           F( 14,304145) ={res} 8230.56
+    {txt}   Model {char |} {res} 6.9134e+12    14  4.9381e+11           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.8248e+13304145  59997365.8           {txt}R-squared     = {res} 0.2748
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2747
+    {txt}   Total {char |} {res} 2.5161e+13304159  82724055.9           {txt}Root MSE      = {res} 7745.8
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2} 3024.883{col 26}{space 2} 99.87247{col 37}{space 1}   30.29{col 46}{space 3}0.000{col 54}{space 4} 2829.136{col 67}{space 3}  3220.63
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} 1473.736{col 26}{space 2} 73.61662{col 37}{space 1}   20.02{col 46}{space 3}0.000{col 54}{space 4} 1329.449{col 67}{space 3} 1618.022
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 422.9038{col 26}{space 2} 13.55637{col 37}{space 1}   31.20{col 46}{space 3}0.000{col 54}{space 4} 396.3337{col 67}{space 3} 449.4739
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 582.5713{col 26}{space 2} 10.79078{col 37}{space 1}   53.99{col 46}{space 3}0.000{col 54}{space 4} 561.4217{col 67}{space 3} 603.7209
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} 161.1984{col 26}{space 2} 19.89295{col 37}{space 1}    8.10{col 46}{space 3}0.000{col 54}{space 4} 122.2088{col 67}{space 3} 200.1881
+{txt}{space 12} {c |}
+{space 9}sex {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} -4706.75{col 26}{space 2}  28.6772{col 37}{space 1} -164.13{col 46}{space 3}0.000{col 54}{space 4}-4762.957{col 67}{space 3}-4650.544
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2641.274{col 26}{space 2} 1224.893{col 37}{space 1}   -2.16{col 46}{space 3}0.031{col 54}{space 4}-5042.029{col 67}{space 3}-240.5184
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} 251.3729{col 26}{space 2} 1.119798{col 37}{space 1}  224.48{col 46}{space 3}0.000{col 54}{space 4} 249.1781{col 67}{space 3} 253.5677
+{txt}{space 12} {c |}
+{space 8}dur1 {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-1023.989{col 26}{space 2} 386.7016{col 37}{space 1}   -2.65{col 46}{space 3}0.008{col 54}{space 4}-1781.913{col 67}{space 3}-266.0644
+{txt}{space 10}2  {c |}{col 14}{res}{space 2}-2744.585{col 26}{space 2} 255.6021{col 37}{space 1}  -10.74{col 46}{space 3}0.000{col 54}{space 4}-3245.558{col 67}{space 3}-2243.613
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-2661.799{col 26}{space 2} 223.3997{col 37}{space 1}  -11.91{col 46}{space 3}0.000{col 54}{space 4}-3099.656{col 67}{space 3}-2223.942
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-2345.966{col 26}{space 2} 227.3789{col 37}{space 1}  -10.32{col 46}{space 3}0.000{col 54}{space 4}-2791.622{col 67}{space 3}-1900.309
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-1316.605{col 26}{space 2}  363.908{col 37}{space 1}   -3.62{col 46}{space 3}0.000{col 54}{space 4}-2029.854{col 67}{space 3}-603.3558
+{txt}{space 10}6  {c |}{col 14}{res}{space 2}-269.9925{col 26}{space 2} 215.9981{col 37}{space 1}   -1.25{col 46}{space 3}0.211{col 54}{space 4}-693.3428{col 67}{space 3} 153.3577
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-10105.56{col 26}{space 2} 157.3747{col 37}{space 1}  -64.21{col 46}{space 3}0.000{col 54}{space 4}-10414.01{col 67}{space 3}-9797.111
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 8}voc2 {c |} {res}     2.07    0.483570
+{txt}{space 8}subs {c |} {res}     1.01    0.986183
+{txt}{space 7}y_edu {c |} {res}    21.01    0.047587
+{txt}{space 6}tedlvl {c |} {res}     1.21    0.829831
+{txt}{space 6}gedlvl {c |} {res}    20.82    0.048023
+{txt}{space 9}sex {c |}
+{space 10}2  {c |} {res}     1.04    0.959485
+{txt}{space 10}3  {c |} {res}     1.00    0.999846
+{txt}{space 9}age {c |} {res}     1.09    0.916508
+{txt}{space 8}dur1 {c |}
+{space 10}1  {c |} {res}     1.07    0.934386
+{txt}{space 10}2  {c |} {res}     1.18    0.849426
+{txt}{space 10}3  {c |} {res}     1.25    0.799586
+{txt}{space 10}4  {c |} {res}     1.27    0.787931
+{txt}{space 10}5  {c |} {res}     1.10    0.913068
+{txt}{space 10}6  {c |} {res}     1.36    0.735751
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     4.03
+
+{com}. reg totwage voc2  subs y_edu tedlvl gedlvl i.sex age i.dur1 field_job
+{p 0 6 2}{txt}note: voc2 omitted because of collinearity{p_end}
+
+      Source {c |}       SS       df       MS              Number of obs ={res}    3699
+{txt}{hline 13}{char +}{hline 30}           F( 12,  3686) ={res}   78.17
+    {txt}   Model {char |} {res} 3.6019e+11    12  3.0016e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.4154e+12  3686   383996991           {txt}R-squared     = {res} 0.2029
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2003
+    {txt}   Total {char |} {res} 1.7756e+12  3698   480152047           {txt}Root MSE      = {res}  19596
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 8}subs {c |}{col 14}{res}{space 2} 7376.542{col 26}{space 2} 1270.902{col 37}{space 1}    5.80{col 46}{space 3}0.000{col 54}{space 4} 4884.802{col 67}{space 3} 9868.283
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1744.623{col 26}{space 2} 249.7991{col 37}{space 1}    6.98{col 46}{space 3}0.000{col 54}{space 4} 1254.865{col 67}{space 3} 2234.381
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 211.1393{col 26}{space 2} 78.04807{col 37}{space 1}    2.71{col 46}{space 3}0.007{col 54}{space 4} 58.11761{col 67}{space 3} 364.1609
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-83.20645{col 26}{space 2}  421.282{col 37}{space 1}   -0.20{col 46}{space 3}0.843{col 54}{space 4}-909.1752{col 67}{space 3} 742.7623
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-3430.055{col 26}{space 2} 725.4568{col 37}{space 1}   -4.73{col 46}{space 3}0.000{col 54}{space 4}-4852.391{col 67}{space 3}-2007.719
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 745.7504{col 26}{space 2} 33.63371{col 37}{space 1}   22.17{col 46}{space 3}0.000{col 54}{space 4} 679.8079{col 67}{space 3} 811.6929
+{txt}{space 12} {c |}
+{space 8}dur1 {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-723.9231{col 26}{space 2} 1574.864{col 37}{space 1}   -0.46{col 46}{space 3}0.646{col 54}{space 4}-3811.613{col 67}{space 3} 2363.767
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-1503.947{col 26}{space 2} 1485.542{col 37}{space 1}   -1.01{col 46}{space 3}0.311{col 54}{space 4}-4416.512{col 67}{space 3} 1408.618
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-542.4126{col 26}{space 2} 1496.549{col 37}{space 1}   -0.36{col 46}{space 3}0.717{col 54}{space 4}-3476.559{col 67}{space 3} 2391.733
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-594.0007{col 26}{space 2} 1729.856{col 37}{space 1}   -0.34{col 46}{space 3}0.731{col 54}{space 4}-3985.571{col 67}{space 3} 2797.569
+{txt}{space 10}6  {c |}{col 14}{res}{space 2}  1157.13{col 26}{space 2}  1466.59{col 37}{space 1}    0.79{col 46}{space 3}0.430{col 54}{space 4}-1718.277{col 67}{space 3} 4032.537
+{txt}{space 12} {c |}
+{space 3}field_job {c |}{col 14}{res}{space 2} 2040.526{col 26}{space 2} 740.3672{col 37}{space 1}    2.76{col 46}{space 3}0.006{col 54}{space 4}  588.956{col 67}{space 3} 3492.095
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-45882.46{col 26}{space 2} 3556.229{col 37}{space 1}  -12.90{col 46}{space 3}0.000{col 54}{space 4}-52854.83{col 67}{space 3}-38910.09
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage voc2  subs y_edu tedlvl gedlvl i.sex age  field_job
+{p 0 6 2}{txt}note: voc2 omitted because of collinearity{p_end}
+
+      Source {c |}       SS       df       MS              Number of obs ={res}    3699
+{txt}{hline 13}{char +}{hline 30}           F(  7,  3691) ={res}  132.67
+    {txt}   Model {char |} {res} 3.5694e+11     7  5.0991e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.4187e+12  3691   384357366           {txt}R-squared     = {res} 0.2010
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1995
+    {txt}   Total {char |} {res} 1.7756e+12  3698   480152047           {txt}Root MSE      = {res}  19605
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}voc2 {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 8}subs {c |}{col 14}{res}{space 2} 7519.811{col 26}{space 2} 1267.916{col 37}{space 1}    5.93{col 46}{space 3}0.000{col 54}{space 4} 5033.926{col 67}{space 3}  10005.7
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1820.655{col 26}{space 2} 248.1298{col 37}{space 1}    7.34{col 46}{space 3}0.000{col 54}{space 4}  1334.17{col 67}{space 3} 2307.139
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 260.2129{col 26}{space 2} 75.41151{col 37}{space 1}    3.45{col 46}{space 3}0.001{col 54}{space 4} 112.3606{col 67}{space 3} 408.0653
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-156.4096{col 26}{space 2} 419.5294{col 37}{space 1}   -0.37{col 46}{space 3}0.709{col 54}{space 4} -978.942{col 67}{space 3} 666.1227
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2} -3722.91{col 26}{space 2} 717.3966{col 37}{space 1}   -5.19{col 46}{space 3}0.000{col 54}{space 4}-5129.442{col 67}{space 3}-2316.377
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 749.0425{col 26}{space 2} 33.54443{col 37}{space 1}   22.33{col 46}{space 3}0.000{col 54}{space 4} 683.2751{col 67}{space 3} 814.8099
+{txt}{space 3}field_job {c |}{col 14}{res}{space 2} 2068.735{col 26}{space 2} 738.8398{col 37}{space 1}    2.80{col 46}{space 3}0.005{col 54}{space 4} 620.1606{col 67}{space 3}  3517.31
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-46913.05{col 26}{space 2} 3360.328{col 37}{space 1}  -13.96{col 46}{space 3}0.000{col 54}{space 4}-53501.34{col 67}{space 3}-40324.77
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage subs y_edu tedlvl gedlvl i.sex age  field_job
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3699
+{txt}{hline 13}{char +}{hline 30}           F(  7,  3691) ={res}  132.67
+    {txt}   Model {char |} {res} 3.5694e+11     7  5.0991e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.4187e+12  3691   384357366           {txt}R-squared     = {res} 0.2010
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1995
+    {txt}   Total {char |} {res} 1.7756e+12  3698   480152047           {txt}Root MSE      = {res}  19605
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}subs {c |}{col 14}{res}{space 2} 7519.811{col 26}{space 2} 1267.916{col 37}{space 1}    5.93{col 46}{space 3}0.000{col 54}{space 4} 5033.926{col 67}{space 3}  10005.7
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1820.655{col 26}{space 2} 248.1298{col 37}{space 1}    7.34{col 46}{space 3}0.000{col 54}{space 4}  1334.17{col 67}{space 3} 2307.139
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 260.2129{col 26}{space 2} 75.41151{col 37}{space 1}    3.45{col 46}{space 3}0.001{col 54}{space 4} 112.3606{col 67}{space 3} 408.0653
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-156.4096{col 26}{space 2} 419.5294{col 37}{space 1}   -0.37{col 46}{space 3}0.709{col 54}{space 4} -978.942{col 67}{space 3} 666.1227
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2} -3722.91{col 26}{space 2} 717.3966{col 37}{space 1}   -5.19{col 46}{space 3}0.000{col 54}{space 4}-5129.442{col 67}{space 3}-2316.377
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 749.0425{col 26}{space 2} 33.54443{col 37}{space 1}   22.33{col 46}{space 3}0.000{col 54}{space 4} 683.2751{col 67}{space 3} 814.8099
+{txt}{space 3}field_job {c |}{col 14}{res}{space 2} 2068.735{col 26}{space 2} 738.8398{col 37}{space 1}    2.80{col 46}{space 3}0.005{col 54}{space 4} 620.1606{col 67}{space 3}  3517.31
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-46913.05{col 26}{space 2} 3360.328{col 37}{space 1}  -13.96{col 46}{space 3}0.000{col 54}{space 4}-53501.34{col 67}{space 3}-40324.77
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage field_job field_job subs y_edu tedlvl gedlvl i.sex age
+{p 0 6 2}{txt}note: field_job omitted because of collinearity{p_end}
+
+      Source {c |}       SS       df       MS              Number of obs ={res}    3699
+{txt}{hline 13}{char +}{hline 30}           F(  7,  3691) ={res}  132.67
+    {txt}   Model {char |} {res} 3.5694e+11     7  5.0991e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.4187e+12  3691   384357366           {txt}R-squared     = {res} 0.2010
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1995
+    {txt}   Total {char |} {res} 1.7756e+12  3698   480152047           {txt}Root MSE      = {res}  19605
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}field_job {c |}{col 14}{res}{space 2} 2068.735{col 26}{space 2} 738.8398{col 37}{space 1}    2.80{col 46}{space 3}0.005{col 54}{space 4} 620.1606{col 67}{space 3}  3517.31
+{txt}{space 3}field_job {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 8}subs {c |}{col 14}{res}{space 2} 7519.811{col 26}{space 2} 1267.916{col 37}{space 1}    5.93{col 46}{space 3}0.000{col 54}{space 4} 5033.926{col 67}{space 3}  10005.7
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1820.655{col 26}{space 2} 248.1298{col 37}{space 1}    7.34{col 46}{space 3}0.000{col 54}{space 4}  1334.17{col 67}{space 3} 2307.139
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 260.2129{col 26}{space 2} 75.41151{col 37}{space 1}    3.45{col 46}{space 3}0.001{col 54}{space 4} 112.3606{col 67}{space 3} 408.0653
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-156.4096{col 26}{space 2} 419.5294{col 37}{space 1}   -0.37{col 46}{space 3}0.709{col 54}{space 4} -978.942{col 67}{space 3} 666.1227
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2} -3722.91{col 26}{space 2} 717.3966{col 37}{space 1}   -5.19{col 46}{space 3}0.000{col 54}{space 4}-5129.442{col 67}{space 3}-2316.377
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 749.0425{col 26}{space 2} 33.54443{col 37}{space 1}   22.33{col 46}{space 3}0.000{col 54}{space 4} 683.2751{col 67}{space 3} 814.8099
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-46913.05{col 26}{space 2} 3360.328{col 37}{space 1}  -13.96{col 46}{space 3}0.000{col 54}{space 4}-53501.34{col 67}{space 3}-40324.77
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg totwage field_job subs y_edu tedlvl gedlvl i.sex age
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3699
+{txt}{hline 13}{char +}{hline 30}           F(  7,  3691) ={res}  132.67
+    {txt}   Model {char |} {res} 3.5694e+11     7  5.0991e+10           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1.4187e+12  3691   384357366           {txt}R-squared     = {res} 0.2010
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1995
+    {txt}   Total {char |} {res} 1.7756e+12  3698   480152047           {txt}Root MSE      = {res}  19605
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     totwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}field_job {c |}{col 14}{res}{space 2} 2068.735{col 26}{space 2} 738.8398{col 37}{space 1}    2.80{col 46}{space 3}0.005{col 54}{space 4} 620.1606{col 67}{space 3}  3517.31
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} 7519.811{col 26}{space 2} 1267.916{col 37}{space 1}    5.93{col 46}{space 3}0.000{col 54}{space 4} 5033.926{col 67}{space 3}  10005.7
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} 1820.655{col 26}{space 2} 248.1298{col 37}{space 1}    7.34{col 46}{space 3}0.000{col 54}{space 4}  1334.17{col 67}{space 3} 2307.139
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} 260.2129{col 26}{space 2} 75.41151{col 37}{space 1}    3.45{col 46}{space 3}0.001{col 54}{space 4} 112.3606{col 67}{space 3} 408.0653
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2}-156.4096{col 26}{space 2} 419.5294{col 37}{space 1}   -0.37{col 46}{space 3}0.709{col 54}{space 4} -978.942{col 67}{space 3} 666.1227
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2} -3722.91{col 26}{space 2} 717.3966{col 37}{space 1}   -5.19{col 46}{space 3}0.000{col 54}{space 4}-5129.442{col 67}{space 3}-2316.377
+{txt}{space 9}age {c |}{col 14}{res}{space 2} 749.0425{col 26}{space 2} 33.54443{col 37}{space 1}   22.33{col 46}{space 3}0.000{col 54}{space 4} 683.2751{col 67}{space 3} 814.8099
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-46913.05{col 26}{space 2} 3360.328{col 37}{space 1}  -13.96{col 46}{space 3}0.000{col 54}{space 4}-53501.34{col 67}{space 3}-40324.77
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage field_job subs y_edu tedlvl gedlvl i.sex age
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3268
+{txt}{hline 13}{char +}{hline 30}           F(  7,  3260) ={res}  213.32
+    {txt}   Model {char |} {res} 859.802417     7  122.828917           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1877.06964  3260  .575788233           {txt}R-squared     = {res} 0.3142
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3127
+    {txt}   Total {char |} {res} 2736.87206  3267  .837732494           {txt}Root MSE      = {res} .75881
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}field_job {c |}{col 14}{res}{space 2} .0702489{col 26}{space 2} .0301307{col 37}{space 1}    2.33{col 46}{space 3}0.020{col 54}{space 4} .0111718{col 67}{space 3} .1293259
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4951932{col 26}{space 2} .0553253{col 37}{space 1}    8.95{col 46}{space 3}0.000{col 54}{space 4} .3867173{col 67}{space 3} .6036691
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0765688{col 26}{space 2} .0102172{col 37}{space 1}    7.49{col 46}{space 3}0.000{col 54}{space 4}  .056536{col 67}{space 3} .0966017
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .014005{col 26}{space 2} .0030628{col 37}{space 1}    4.57{col 46}{space 3}0.000{col 54}{space 4} .0079997{col 67}{space 3} .0200102
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0225912{col 26}{space 2} .0173785{col 37}{space 1}    1.30{col 46}{space 3}0.194{col 54}{space 4}-.0114826{col 67}{space 3}  .056665
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-.4167575{col 26}{space 2} .0296622{col 37}{space 1}  -14.05{col 46}{space 3}0.000{col 54}{space 4}-.4749159{col 67}{space 3}-.3585991
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0344126{col 26}{space 2} .0013756{col 37}{space 1}   25.02{col 46}{space 3}0.000{col 54}{space 4} .0317154{col 67}{space 3} .0371098
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  6.07429{col 26}{space 2} .1455326{col 37}{space 1}   41.74{col 46}{space 3}0.000{col 54}{space 4} 5.788945{col 67}{space 3} 6.359634
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. gen vfield = field_job* voc2
+{txt}(429640 missing values generated)
+
+{com}. reg lgwage vfield subs y_edu tedlvl gedlvl i.sex age
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3268
+{txt}{hline 13}{char +}{hline 30}           F(  7,  3260) ={res}  213.32
+    {txt}   Model {char |} {res} 859.802417     7  122.828917           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1877.06964  3260  .575788233           {txt}R-squared     = {res} 0.3142
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3127
+    {txt}   Total {char |} {res} 2736.87206  3267  .837732494           {txt}Root MSE      = {res} .75881
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}vfield {c |}{col 14}{res}{space 2} .0702489{col 26}{space 2} .0301307{col 37}{space 1}    2.33{col 46}{space 3}0.020{col 54}{space 4} .0111718{col 67}{space 3} .1293259
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4951932{col 26}{space 2} .0553253{col 37}{space 1}    8.95{col 46}{space 3}0.000{col 54}{space 4} .3867173{col 67}{space 3} .6036691
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0765688{col 26}{space 2} .0102172{col 37}{space 1}    7.49{col 46}{space 3}0.000{col 54}{space 4}  .056536{col 67}{space 3} .0966017
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .014005{col 26}{space 2} .0030628{col 37}{space 1}    4.57{col 46}{space 3}0.000{col 54}{space 4} .0079997{col 67}{space 3} .0200102
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0225912{col 26}{space 2} .0173785{col 37}{space 1}    1.30{col 46}{space 3}0.194{col 54}{space 4}-.0114826{col 67}{space 3}  .056665
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-.4167575{col 26}{space 2} .0296622{col 37}{space 1}  -14.05{col 46}{space 3}0.000{col 54}{space 4}-.4749159{col 67}{space 3}-.3585991
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0344126{col 26}{space 2} .0013756{col 37}{space 1}   25.02{col 46}{space 3}0.000{col 54}{space 4} .0317154{col 67}{space 3} .0371098
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  6.07429{col 26}{space 2} .1455326{col 37}{space 1}   41.74{col 46}{space 3}0.000{col 54}{space 4} 5.788945{col 67}{space 3} 6.359634
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage vfield subs y_edu tedlvl gedlvl i.sex age i.dur1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3268
+{txt}{hline 13}{char +}{hline 30}           F( 12,  3255) ={res}  128.04
+    {txt}   Model {char |} {res} 877.646223    12  73.1371853           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1859.22583  3255  .571190732           {txt}R-squared     = {res} 0.3207
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3182
+    {txt}   Total {char |} {res} 2736.87206  3267  .837732494           {txt}Root MSE      = {res} .75577
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}vfield {c |}{col 14}{res}{space 2}  .065418{col 26}{space 2} .0301145{col 37}{space 1}    2.17{col 46}{space 3}0.030{col 54}{space 4} .0063727{col 67}{space 3} .1244632
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4793255{col 26}{space 2} .0552413{col 37}{space 1}    8.68{col 46}{space 3}0.000{col 54}{space 4} .3710143{col 67}{space 3} .5876367
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0700426{col 26}{space 2} .0102518{col 37}{space 1}    6.83{col 46}{space 3}0.000{col 54}{space 4}  .049942{col 67}{space 3} .0901431
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0101566{col 26}{space 2} .0031546{col 37}{space 1}    3.22{col 46}{space 3}0.001{col 54}{space 4} .0039715{col 67}{space 3} .0163418
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0299695{col 26}{space 2} .0173973{col 37}{space 1}    1.72{col 46}{space 3}0.085{col 54}{space 4}-.0041412{col 67}{space 3} .0640802
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-.3938576{col 26}{space 2} .0298308{col 37}{space 1}  -13.20{col 46}{space 3}0.000{col 54}{space 4}-.4523466{col 67}{space 3}-.3353685
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0341281{col 26}{space 2} .0013744{col 37}{space 1}   24.83{col 46}{space 3}0.000{col 54}{space 4} .0314333{col 67}{space 3} .0368228
+{txt}{space 12} {c |}
+{space 8}dur1 {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0383263{col 26}{space 2} .0654353{col 37}{space 1}   -0.59{col 46}{space 3}0.558{col 54}{space 4}-.1666249{col 67}{space 3} .0899723
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} -.090332{col 26}{space 2} .0616394{col 37}{space 1}   -1.47{col 46}{space 3}0.143{col 54}{space 4} -.211188{col 67}{space 3}  .030524
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.0621309{col 26}{space 2} .0622111{col 37}{space 1}   -1.00{col 46}{space 3}0.318{col 54}{space 4}-.1841078{col 67}{space 3}  .059846
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} .0443958{col 26}{space 2} .0712365{col 37}{space 1}    0.62{col 46}{space 3}0.533{col 54}{space 4}-.0952772{col 67}{space 3} .1840688
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .1022445{col 26}{space 2} .0607219{col 37}{space 1}    1.68{col 46}{space 3}0.092{col 54}{space 4}-.0168125{col 67}{space 3} .2213014
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.140649{col 26}{space 2} .1527286{col 37}{space 1}   40.21{col 46}{space 3}0.000{col 54}{space 4} 5.841195{col 67}{space 3} 6.440103
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage vfield subs y_edu tedlvl gedlvl i.sex age i.dur1 septrain
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3268
+{txt}{hline 13}{char +}{hline 30}           F( 13,  3254) ={res}  122.63
+    {txt}   Model {char |} {res} 899.921404    13  69.2247234           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1836.95065  3254   .56452079           {txt}R-squared     = {res} 0.3288
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3261
+    {txt}   Total {char |} {res} 2736.87206  3267  .837732494           {txt}Root MSE      = {res} .75135
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}vfield {c |}{col 14}{res}{space 2} .0556632{col 26}{space 2} .0299784{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.0031152{col 67}{space 3} .1144417
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4657835{col 26}{space 2} .0549601{col 37}{space 1}    8.47{col 46}{space 3}0.000{col 54}{space 4} .3580236{col 67}{space 3} .5735434
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0694536{col 26}{space 2} .0101922{col 37}{space 1}    6.81{col 46}{space 3}0.000{col 54}{space 4} .0494699{col 67}{space 3} .0894373
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0113615{col 26}{space 2} .0031419{col 37}{space 1}    3.62{col 46}{space 3}0.000{col 54}{space 4} .0052011{col 67}{space 3} .0175219
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0301537{col 26}{space 2} .0172954{col 37}{space 1}    1.74{col 46}{space 3}0.081{col 54}{space 4}-.0037573{col 67}{space 3} .0640647
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-.3922566{col 26}{space 2} .0296572{col 37}{space 1}  -13.23{col 46}{space 3}0.000{col 54}{space 4}-.4504053{col 67}{space 3}-.3341079
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0332294{col 26}{space 2} .0013738{col 37}{space 1}   24.19{col 46}{space 3}0.000{col 54}{space 4} .0305357{col 67}{space 3}  .035923
+{txt}{space 12} {c |}
+{space 8}dur1 {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0065507{col 26}{space 2} .0652485{col 37}{space 1}   -0.10{col 46}{space 3}0.920{col 54}{space 4} -.134483{col 67}{space 3} .1213817
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-.0316777{col 26}{space 2} .0619858{col 37}{space 1}   -0.51{col 46}{space 3}0.609{col 54}{space 4}-.1532128{col 67}{space 3} .0898575
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .0015133{col 26}{space 2} .0626712{col 37}{space 1}    0.02{col 46}{space 3}0.981{col 54}{space 4}-.1213658{col 67}{space 3} .1243923
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} .1032616{col 26}{space 2} .0714367{col 37}{space 1}    1.45{col 46}{space 3}0.148{col 54}{space 4}-.0368039{col 67}{space 3} .2433271
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .1717237{col 26}{space 2} .0613712{col 37}{space 1}    2.80{col 46}{space 3}0.005{col 54}{space 4} .0513936{col 67}{space 3} .2920539
+{txt}{space 12} {c |}
+{space 4}septrain {c |}{col 14}{res}{space 2}-.2838152{col 26}{space 2}  .045182{col 37}{space 1}   -6.28{col 46}{space 3}0.000{col 54}{space 4}-.3724032{col 67}{space 3}-.1952273
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.400074{col 26}{space 2} .1573507{col 37}{space 1}   40.67{col 46}{space 3}0.000{col 54}{space 4} 6.091558{col 67}{space 3} 6.708591
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage vfield subs y_edu tedlvl gedlvl i.sex age dur1 septrain
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3268
+{txt}{hline 13}{char +}{hline 30}           F(  9,  3258) ={res}  175.81
+    {txt}   Model {char |} {res} 894.692433     9  99.4102703           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1842.17962  3258  .565432665           {txt}R-squared     = {res} 0.3269
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3250
+    {txt}   Total {char |} {res} 2736.87206  3267  .837732494           {txt}Root MSE      = {res} .75195
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}vfield {c |}{col 14}{res}{space 2} .0599181{col 26}{space 2} .0299045{col 37}{space 1}    2.00{col 46}{space 3}0.045{col 54}{space 4} .0012846{col 67}{space 3} .1185516
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4715564{col 26}{space 2} .0549085{col 37}{space 1}    8.59{col 46}{space 3}0.000{col 54}{space 4} .3638977{col 67}{space 3} .5792151
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0711645{col 26}{space 2} .0101814{col 37}{space 1}    6.99{col 46}{space 3}0.000{col 54}{space 4} .0512019{col 67}{space 3}  .091127
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0119456{col 26}{space 2} .0031334{col 37}{space 1}    3.81{col 46}{space 3}0.000{col 54}{space 4}  .005802{col 67}{space 3} .0180892
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0255144{col 26}{space 2} .0172272{col 37}{space 1}    1.48{col 46}{space 3}0.139{col 54}{space 4}-.0082628{col 67}{space 3} .0592916
+{txt}{space 7}2.sex {c |}{col 14}{res}{space 2}-.4003741{col 26}{space 2} .0295526{col 37}{space 1}  -13.55{col 46}{space 3}0.000{col 54}{space 4}-.4583176{col 67}{space 3}-.3424305
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0333061{col 26}{space 2} .0013717{col 37}{space 1}   24.28{col 46}{space 3}0.000{col 54}{space 4} .0306167{col 67}{space 3} .0359955
+{txt}{space 8}dur1 {c |}{col 14}{res}{space 2} .0466885{col 26}{space 2}   .00895{col 37}{space 1}    5.22{col 46}{space 3}0.000{col 54}{space 4} .0291402{col 67}{space 3} .0642367
+{txt}{space 4}septrain {c |}{col 14}{res}{space 2}-.2994537{col 26}{space 2} .0448833{col 37}{space 1}   -6.67{col 46}{space 3}0.000{col 54}{space 4}-.3874561{col 67}{space 3}-.2114513
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.290545{col 26}{space 2} .1517891{col 37}{space 1}   41.44{col 46}{space 3}0.000{col 54}{space 4} 5.992933{col 67}{space 3} 6.588156
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. log off
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\setti\OneDrive\Desktop\PLFS\PLFS_1.smcl
+  {txt}log type:  {res}smcl
+ {txt}paused on:  {res}18 Nov 2020, 02:36:06
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\setti\OneDrive\Desktop\PLFS\PLFS_1.smcl
+  {txt}log type:  {res}smcl
+{txt}resumed on:  {res}20 Nov 2020, 23:13:25
+
+{com}. gen field_cat = .
+{txt}(433339 missing values generated)
+
+{com}. replace field_cat = 0 if( voc2 == 0)
+{txt}(302292 real changes made)
+
+{com}. replace field_cat = 1 if(fi field_job == 0)
+{err}fifield_job not found
+{txt}{search r(111):r(111);}
+
+{com}. replace field_cat = 1 if(field_job == 0)
+{txt}(2687 real changes made)
+
+{com}. replace field_cat = 2 if(field_job == 1)
+{txt}(1012 real changes made)
+
+{com}. br field_cat field_job voc2
+
+. reg lgwage sex age gedlvl tedlvl y_edu subs field_cat
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F(  7, 86739) ={res} 5167.26
+    {txt}   Model {char |} {res} 17098.2838     7  2442.61197           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 41002.3393 86739  .472709385           {txt}R-squared     = {res} 0.2943
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2942
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68754
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5420637{col 26}{space 2} .0061409{col 37}{space 1}  -88.27{col 46}{space 3}0.000{col 54}{space 4}-.5540999{col 67}{space 3}-.5300275
+{txt}{space 9}age {c |}{col 14}{res}{space 2}  .018245{col 26}{space 2} .0002321{col 37}{space 1}   78.59{col 46}{space 3}0.000{col 54}{space 4}   .01779{col 67}{space 3}    .0187
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0158895{col 26}{space 2} .0033067{col 37}{space 1}    4.81{col 46}{space 3}0.000{col 54}{space 4} .0094085{col 67}{space 3} .0223705
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0284503{col 26}{space 2} .0012805{col 37}{space 1}   22.22{col 46}{space 3}0.000{col 54}{space 4} .0259405{col 67}{space 3}   .03096
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0571931{col 26}{space 2} .0022402{col 37}{space 1}   25.53{col 46}{space 3}0.000{col 54}{space 4} .0528023{col 67}{space 3}  .061584
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4176877{col 26}{space 2} .0099941{col 37}{space 1}   41.79{col 46}{space 3}0.000{col 54}{space 4} .3980994{col 67}{space 3}  .437276
+{txt}{space 3}field_cat {c |}{col 14}{res}{space 2} .0441688{col 26}{space 2} .0095139{col 37}{space 1}    4.64{col 46}{space 3}0.000{col 54}{space 4} .0255216{col 67}{space 3}  .062816
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.613666{col 26}{space 2} .0244248{col 37}{space 1}  311.72{col 46}{space 3}0.000{col 54}{space 4} 7.565794{col 67}{space 3} 7.661539
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F(  8, 86738) ={res} 4521.80
+    {txt}   Model {char |} {res}  17099.613     8  2137.45162           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 41001.0101 86738  .472699511           {txt}R-squared     = {res} 0.2943
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2942
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68753
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5421813{col 26}{space 2} .0061413{col 37}{space 1}  -88.28{col 46}{space 3}0.000{col 54}{space 4}-.5542181{col 67}{space 3}-.5301444
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0182399{col 26}{space 2} .0002322{col 37}{space 1}   78.56{col 46}{space 3}0.000{col 54}{space 4} .0177849{col 67}{space 3}  .018695
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0159371{col 26}{space 2} .0033067{col 37}{space 1}    4.82{col 46}{space 3}0.000{col 54}{space 4} .0094559{col 67}{space 3} .0224183
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0287566{col 26}{space 2} .0012934{col 37}{space 1}   22.23{col 46}{space 3}0.000{col 54}{space 4} .0262214{col 67}{space 3} .0312917
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0571984{col 26}{space 2} .0022402{col 37}{space 1}   25.53{col 46}{space 3}0.000{col 54}{space 4} .0528076{col 67}{space 3} .0615892
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4174362{col 26}{space 2} .0099951{col 37}{space 1}   41.76{col 46}{space 3}0.000{col 54}{space 4}  .397846{col 67}{space 3} .4370265
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0241695{col 26}{space 2} .0152563{col 37}{space 1}    1.58{col 46}{space 3}0.113{col 54}{space 4}-.0057326{col 67}{space 3} .0540717
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1101669{col 26}{space 2} .0230546{col 37}{space 1}    4.78{col 46}{space 3}0.000{col 54}{space 4} .0649801{col 67}{space 3} .1553537
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 7.613936{col 26}{space 2} .0244251{col 37}{space 1}  311.73{col 46}{space 3}0.000{col 54}{space 4} 7.566063{col 67}{space 3} 7.661809
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. estat hettest
+
+{txt}Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+{p 9 20}Variables: fitted values of lgwage
+
+{col 10}chi2({res}1{txt}){col 23}={res}    88.00
+{txt}{col 10}Prob > chi2{col 23}={res}   0.0000
+
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F(  9, 86737) ={res} 4099.14
+    {txt}   Model {char |} {res} 17337.8288     9  1926.42542           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40762.7943 86737  .469958545           {txt}R-squared     = {res} 0.2984
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2983
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68554
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5454318{col 26}{space 2} .0061251{col 37}{space 1}  -89.05{col 46}{space 3}0.000{col 54}{space 4} -.557437{col 67}{space 3}-.5334265
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0545734{col 26}{space 2} .0016303{col 37}{space 1}   33.47{col 46}{space 3}0.000{col 54}{space 4}  .051378{col 67}{space 3} .0577688
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0168846{col 26}{space 2} .0032974{col 37}{space 1}    5.12{col 46}{space 3}0.000{col 54}{space 4} .0104217{col 67}{space 3} .0233475
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0289559{col 26}{space 2} .0012897{col 37}{space 1}   22.45{col 46}{space 3}0.000{col 54}{space 4}  .026428{col 67}{space 3} .0314837
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0560178{col 26}{space 2} .0022343{col 37}{space 1}   25.07{col 46}{space 3}0.000{col 54}{space 4} .0516386{col 67}{space 3}  .060397
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4228947{col 26}{space 2}  .009969{col 37}{space 1}   42.42{col 46}{space 3}0.000{col 54}{space 4} .4033555{col 67}{space 3} .4424339
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0262942{col 26}{space 2} .0152123{col 37}{space 1}    1.73{col 46}{space 3}0.084{col 54}{space 4}-.0035217{col 67}{space 3} .0561101
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1135005{col 26}{space 2} .0229881{col 37}{space 1}    4.94{col 46}{space 3}0.000{col 54}{space 4}  .068444{col 67}{space 3}  .158557
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004698{col 26}{space 2} .0000209{col 37}{space 1}  -22.51{col 46}{space 3}0.000{col 54}{space 4}-.0005107{col 67}{space 3}-.0004289
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.958571{col 26}{space 2} .0379534{col 37}{space 1}  183.35{col 46}{space 3}0.000{col 54}{space 4} 6.884183{col 67}{space 3}  7.03296
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F( 10, 86736) ={res} 3695.26
+    {txt}   Model {char |} {res} 17357.8413    10  1735.78413           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40742.7818 86736  .469733234           {txt}R-squared     = {res} 0.2988
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2987
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0062347{col 37}{space 1}  -88.71{col 46}{space 3}0.000{col 54}{space 4}-.5652957{col 67}{space 3} -.540856
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0017777{col 37}{space 1}   28.09{col 46}{space 3}0.000{col 54}{space 4} .0464574{col 67}{space 3}  .053426
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0032967{col 37}{space 1}    5.15{col 46}{space 3}0.000{col 54}{space 4}  .010511{col 67}{space 3} .0234338
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0012896{col 37}{space 1}   22.57{col 46}{space 3}0.000{col 54}{space 4} .0265844{col 67}{space 3} .0316397
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022341{col 37}{space 1}   25.19{col 46}{space 3}0.000{col 54}{space 4} .0518966{col 67}{space 3} .0606543
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0099672{col 37}{space 1}   42.50{col 46}{space 3}0.000{col 54}{space 4} .4040559{col 67}{space 3} .4431271
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0152116{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.0015495{col 67}{space 3} .0580798
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0229855{col 37}{space 1}    5.04{col 46}{space 3}0.000{col 54}{space 4} .0708076{col 67}{space 3} .1609102
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000222{col 37}{space 1}  -18.96{col 46}{space 3}0.000{col 54}{space 4}-.0004641{col 67}{space 3}-.0003771
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0062235{col 37}{space 1}    6.53{col 46}{space 3}0.000{col 54}{space 4}  .028424{col 67}{space 3} .0528202
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0381846{col 37}{space 1}  182.97{col 46}{space 3}0.000{col 54}{space 4} 6.911647{col 67}{space 3}  7.06133
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. estat hettest
+
+{txt}Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+{p 9 20}Variables: fitted values of lgwage
+
+{col 10}chi2({res}1{txt}){col 23}={res}   100.57
+{txt}{col 10}Prob > chi2{col 23}={res}   0.0000
+
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit,robust
+
+{txt}Linear regression                                      Number of obs ={res}   86747
+                                                       {txt}F( 10, 86736) ={res} 3192.90
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2988
+                                                       {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0076185{col 37}{space 1}  -72.60{col 46}{space 3}0.000{col 54}{space 4} -.568008{col 67}{space 3}-.5381436
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0018351{col 37}{space 1}   27.22{col 46}{space 3}0.000{col 54}{space 4}  .046345{col 67}{space 3} .0535384
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0033491{col 37}{space 1}    5.07{col 46}{space 3}0.000{col 54}{space 4} .0104082{col 67}{space 3} .0235366
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0014354{col 37}{space 1}   20.28{col 46}{space 3}0.000{col 54}{space 4} .0262988{col 67}{space 3} .0319253
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022748{col 37}{space 1}   24.74{col 46}{space 3}0.000{col 54}{space 4} .0518169{col 67}{space 3}  .060734
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0116279{col 37}{space 1}   36.43{col 46}{space 3}0.000{col 54}{space 4} .4008009{col 67}{space 3}  .446382
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0170356{col 37}{space 1}    1.66{col 46}{space 3}0.097{col 54}{space 4}-.0051246{col 67}{space 3} .0616549
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0264167{col 37}{space 1}    4.39{col 46}{space 3}0.000{col 54}{space 4} .0640824{col 67}{space 3} .1676354
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000231{col 37}{space 1}  -18.17{col 46}{space 3}0.000{col 54}{space 4} -.000466{col 67}{space 3}-.0003752
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0064831{col 37}{space 1}    6.27{col 46}{space 3}0.000{col 54}{space 4} .0279152{col 67}{space 3}  .053329
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0402802{col 37}{space 1}  173.45{col 46}{space 3}0.000{col 54}{space 4}  6.90754{col 67}{space 3} 7.065437
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2, robust
+
+{txt}Linear regression                                      Number of obs ={res}   86747
+                                                       {txt}F(  9, 86737) ={res} 3536.48
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2984
+                                                       {txt}Root MSE      = {res} .68554
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5454318{col 26}{space 2} .0074965{col 37}{space 1}  -72.76{col 46}{space 3}0.000{col 54}{space 4}-.5601248{col 67}{space 3}-.5307387
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0545734{col 26}{space 2} .0016503{col 37}{space 1}   33.07{col 46}{space 3}0.000{col 54}{space 4} .0513388{col 67}{space 3}  .057808
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0168846{col 26}{space 2} .0033514{col 37}{space 1}    5.04{col 46}{space 3}0.000{col 54}{space 4} .0103159{col 67}{space 3} .0234532
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0289559{col 26}{space 2} .0014353{col 37}{space 1}   20.17{col 46}{space 3}0.000{col 54}{space 4} .0261426{col 67}{space 3} .0317691
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0560178{col 26}{space 2} .0022773{col 37}{space 1}   24.60{col 46}{space 3}0.000{col 54}{space 4} .0515543{col 67}{space 3} .0604813
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4228947{col 26}{space 2} .0116267{col 37}{space 1}   36.37{col 46}{space 3}0.000{col 54}{space 4} .4001065{col 67}{space 3} .4456828
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0262942{col 26}{space 2} .0170481{col 37}{space 1}    1.54{col 46}{space 3}0.123{col 54}{space 4}  -.00712{col 67}{space 3} .0597084
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1135005{col 26}{space 2} .0264456{col 37}{space 1}    4.29{col 46}{space 3}0.000{col 54}{space 4} .0616674{col 67}{space 3} .1653336
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004698{col 26}{space 2} .0000215{col 37}{space 1}  -21.89{col 46}{space 3}0.000{col 54}{space 4}-.0005118{col 67}{space 3}-.0004277
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.958571{col 26}{space 2} .0399164{col 37}{space 1}  174.33{col 46}{space 3}0.000{col 54}{space 4} 6.880336{col 67}{space 3} 7.036807
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit,robust
+
+{txt}Linear regression                                      Number of obs ={res}   86747
+                                                       {txt}F( 10, 86736) ={res} 3192.90
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2988
+                                                       {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0076185{col 37}{space 1}  -72.60{col 46}{space 3}0.000{col 54}{space 4} -.568008{col 67}{space 3}-.5381436
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0018351{col 37}{space 1}   27.22{col 46}{space 3}0.000{col 54}{space 4}  .046345{col 67}{space 3} .0535384
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0033491{col 37}{space 1}    5.07{col 46}{space 3}0.000{col 54}{space 4} .0104082{col 67}{space 3} .0235366
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0014354{col 37}{space 1}   20.28{col 46}{space 3}0.000{col 54}{space 4} .0262988{col 67}{space 3} .0319253
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022748{col 37}{space 1}   24.74{col 46}{space 3}0.000{col 54}{space 4} .0518169{col 67}{space 3}  .060734
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0116279{col 37}{space 1}   36.43{col 46}{space 3}0.000{col 54}{space 4} .4008009{col 67}{space 3}  .446382
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0170356{col 37}{space 1}    1.66{col 46}{space 3}0.097{col 54}{space 4}-.0051246{col 67}{space 3} .0616549
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0264167{col 37}{space 1}    4.39{col 46}{space 3}0.000{col 54}{space 4} .0640824{col 67}{space 3} .1676354
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000231{col 37}{space 1}  -18.17{col 46}{space 3}0.000{col 54}{space 4} -.000466{col 67}{space 3}-.0003752
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0064831{col 37}{space 1}    6.27{col 46}{space 3}0.000{col 54}{space 4} .0279152{col 67}{space 3}  .053329
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0402802{col 37}{space 1}  173.45{col 46}{space 3}0.000{col 54}{space 4}  6.90754{col 67}{space 3} 7.065437
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. estat hettest
+{err}hettest not appropriate after robust cluster()
+{txt}{search r(498):r(498);}
+
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit cur_at
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   18733
+{txt}{hline 13}{char +}{hline 30}           F( 11, 18721) ={res}  542.72
+    {txt}   Model {char |} {res} 2449.86626    11  222.715115           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 7682.45865 18721  .410365827           {txt}R-squared     = {res} 0.2418
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2413
+    {txt}   Total {char |} {res} 10132.3249 18732  .540909936           {txt}Root MSE      = {res}  .6406
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.4635284{col 26}{space 2} .0119982{col 37}{space 1}  -38.63{col 46}{space 3}0.000{col 54}{space 4} -.487046{col 67}{space 3}-.4400108
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0603992{col 26}{space 2} .0181831{col 37}{space 1}    3.32{col 46}{space 3}0.001{col 54}{space 4} .0247586{col 67}{space 3} .0960398
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0404183{col 26}{space 2} .0071275{col 37}{space 1}    5.67{col 46}{space 3}0.000{col 54}{space 4} .0264477{col 67}{space 3} .0543889
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0181977{col 26}{space 2}  .002215{col 37}{space 1}    8.22{col 46}{space 3}0.000{col 54}{space 4} .0138562{col 67}{space 3} .0225393
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0273029{col 26}{space 2} .0047697{col 37}{space 1}    5.72{col 46}{space 3}0.000{col 54}{space 4} .0179539{col 67}{space 3} .0366519
+{txt}{space 8}subs {c |}{col 14}{res}{space 2}  .448336{col 26}{space 2} .0232217{col 37}{space 1}   19.31{col 46}{space 3}0.000{col 54}{space 4} .4028195{col 67}{space 3} .4938526
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-.0873977{col 26}{space 2} .0239711{col 37}{space 1}   -3.65{col 46}{space 3}0.000{col 54}{space 4}-.1343832{col 67}{space 3}-.0404122
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .0688092{col 26}{space 2} .0372506{col 37}{space 1}    1.85{col 46}{space 3}0.065{col 54}{space 4}-.0042054{col 67}{space 3} .1418239
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0001754{col 26}{space 2} .0003845{col 37}{space 1}   -0.46{col 46}{space 3}0.648{col 54}{space 4}-.0009289{col 67}{space 3} .0005782
+{txt}{space 7}marit {c |}{col 14}{res}{space 2}-.0726472{col 26}{space 2} .0100874{col 37}{space 1}   -7.20{col 46}{space 3}0.000{col 54}{space 4}-.0924195{col 67}{space 3}-.0528749
+{txt}{space 6}cur_at {c |}{col 14}{res}{space 2}-.0152268{col 26}{space 2} .0013087{col 37}{space 1}  -11.63{col 46}{space 3}0.000{col 54}{space 4} -.017792{col 67}{space 3}-.0126616
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.918686{col 26}{space 2} .2171454{col 37}{space 1}   31.86{col 46}{space 3}0.000{col 54}{space 4} 6.493062{col 67}{space 3} 7.344311
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F( 10, 86736) ={res} 3695.26
+    {txt}   Model {char |} {res} 17357.8413    10  1735.78413           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40742.7818 86736  .469733234           {txt}R-squared     = {res} 0.2988
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2987
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0062347{col 37}{space 1}  -88.71{col 46}{space 3}0.000{col 54}{space 4}-.5652957{col 67}{space 3} -.540856
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0017777{col 37}{space 1}   28.09{col 46}{space 3}0.000{col 54}{space 4} .0464574{col 67}{space 3}  .053426
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0032967{col 37}{space 1}    5.15{col 46}{space 3}0.000{col 54}{space 4}  .010511{col 67}{space 3} .0234338
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0012896{col 37}{space 1}   22.57{col 46}{space 3}0.000{col 54}{space 4} .0265844{col 67}{space 3} .0316397
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022341{col 37}{space 1}   25.19{col 46}{space 3}0.000{col 54}{space 4} .0518966{col 67}{space 3} .0606543
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0099672{col 37}{space 1}   42.50{col 46}{space 3}0.000{col 54}{space 4} .4040559{col 67}{space 3} .4431271
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0152116{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.0015495{col 67}{space 3} .0580798
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0229855{col 37}{space 1}    5.04{col 46}{space 3}0.000{col 54}{space 4} .0708076{col 67}{space 3} .1609102
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000222{col 37}{space 1}  -18.96{col 46}{space 3}0.000{col 54}{space 4}-.0004641{col 67}{space 3}-.0003771
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0062235{col 37}{space 1}    6.53{col 46}{space 3}0.000{col 54}{space 4}  .028424{col 67}{space 3} .0528202
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0381846{col 37}{space 1}  182.97{col 46}{space 3}0.000{col 54}{space 4} 6.911647{col 67}{space 3}  7.06133
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F( 10, 86736) ={res} 3695.26
+    {txt}   Model {char |} {res} 17357.8413    10  1735.78413           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40742.7818 86736  .469733234           {txt}R-squared     = {res} 0.2988
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2987
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0062347{col 37}{space 1}  -88.71{col 46}{space 3}0.000{col 54}{space 4}-.5652957{col 67}{space 3} -.540856
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0017777{col 37}{space 1}   28.09{col 46}{space 3}0.000{col 54}{space 4} .0464574{col 67}{space 3}  .053426
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0032967{col 37}{space 1}    5.15{col 46}{space 3}0.000{col 54}{space 4}  .010511{col 67}{space 3} .0234338
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0012896{col 37}{space 1}   22.57{col 46}{space 3}0.000{col 54}{space 4} .0265844{col 67}{space 3} .0316397
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022341{col 37}{space 1}   25.19{col 46}{space 3}0.000{col 54}{space 4} .0518966{col 67}{space 3} .0606543
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0099672{col 37}{space 1}   42.50{col 46}{space 3}0.000{col 54}{space 4} .4040559{col 67}{space 3} .4431271
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0152116{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.0015495{col 67}{space 3} .0580798
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0229855{col 37}{space 1}    5.04{col 46}{space 3}0.000{col 54}{space 4} .0708076{col 67}{space 3} .1609102
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000222{col 37}{space 1}  -18.96{col 46}{space 3}0.000{col 54}{space 4}-.0004641{col 67}{space 3}-.0003771
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0062235{col 37}{space 1}    6.53{col 46}{space 3}0.000{col 54}{space 4}  .028424{col 67}{space 3} .0528202
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0381846{col 37}{space 1}  182.97{col 46}{space 3}0.000{col 54}{space 4} 6.911647{col 67}{space 3}  7.06133
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit dur2
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F( 11, 86735) ={res} 3361.26
+    {txt}   Model {char |} {res} 17365.0113    11  1578.63739           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40735.6119 86735  .469655985           {txt}R-squared     = {res} 0.2989
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2988
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68531
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5523229{col 26}{space 2} .0062371{col 37}{space 1}  -88.55{col 46}{space 3}0.000{col 54}{space 4}-.5645476{col 67}{space 3}-.5400982
+{txt}{space 9}age {c |}{col 14}{res}{space 2}  .049941{col 26}{space 2} .0017776{col 37}{space 1}   28.10{col 46}{space 3}0.000{col 54}{space 4} .0464571{col 67}{space 3}  .053425
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0171716{col 26}{space 2} .0032968{col 37}{space 1}    5.21{col 46}{space 3}0.000{col 54}{space 4}   .01071{col 67}{space 3} .0236333
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0283726{col 26}{space 2} .0013033{col 37}{space 1}   21.77{col 46}{space 3}0.000{col 54}{space 4} .0258181{col 67}{space 3} .0309271
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0561447{col 26}{space 2} .0022342{col 37}{space 1}   25.13{col 46}{space 3}0.000{col 54}{space 4} .0517657{col 67}{space 3} .0605237
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4233542{col 26}{space 2} .0099666{col 37}{space 1}   42.48{col 46}{space 3}0.000{col 54}{space 4} .4038198{col 67}{space 3} .4428885
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-.0908493{col 26}{space 2} .0340695{col 37}{space 1}   -2.67{col 46}{space 3}0.008{col 54}{space 4}-.1576253{col 67}{space 3}-.0240733
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .0023298{col 26}{space 2} .0370473{col 37}{space 1}    0.06{col 46}{space 3}0.950{col 54}{space 4}-.0702826{col 67}{space 3} .0749423
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000222{col 37}{space 1}  -18.97{col 46}{space 3}0.000{col 54}{space 4}-.0004641{col 67}{space 3}-.0003772
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0403902{col 26}{space 2} .0062233{col 37}{space 1}    6.49{col 46}{space 3}0.000{col 54}{space 4} .0281926{col 67}{space 3} .0525879
+{txt}{space 8}dur2 {c |}{col 14}{res}{space 2} .0295438{col 26}{space 2} .0075613{col 37}{space 1}    3.91{col 46}{space 3}0.000{col 54}{space 4} .0147237{col 67}{space 3} .0443639
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.987227{col 26}{space 2} .0381819{col 37}{space 1}  183.00{col 46}{space 3}0.000{col 54}{space 4} 6.912391{col 67}{space 3} 7.062064
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. ovtest
+
+{txt}Ramsey RESET test using powers of the fitted values of lgwage
+       Ho:  model has no omitted variables
+               F(3, 86732) = {res}    72.29
+                  {txt}Prob > F =      {res}0.0000
+
+{com}. estat hettest
+
+{txt}Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+{p 9 20}Variables: fitted values of lgwage
+
+{col 10}chi2({res}1{txt}){col 23}={res}   102.23
+{txt}{col 10}Prob > chi2{col 23}={res}   0.0000
+
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit dur2, robust
+
+{txt}Linear regression                                      Number of obs ={res}   86747
+                                                       {txt}F( 11, 86735) ={res} 2904.58
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2989
+                                                       {txt}Root MSE      = {res} .68531
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5523229{col 26}{space 2} .0076155{col 37}{space 1}  -72.53{col 46}{space 3}0.000{col 54}{space 4}-.5672492{col 67}{space 3}-.5373966
+{txt}{space 9}age {c |}{col 14}{res}{space 2}  .049941{col 26}{space 2} .0018347{col 37}{space 1}   27.22{col 46}{space 3}0.000{col 54}{space 4}  .046345{col 67}{space 3} .0535371
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0171716{col 26}{space 2} .0033495{col 37}{space 1}    5.13{col 46}{space 3}0.000{col 54}{space 4} .0106066{col 67}{space 3} .0237367
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0283726{col 26}{space 2} .0014507{col 37}{space 1}   19.56{col 46}{space 3}0.000{col 54}{space 4} .0255292{col 67}{space 3}  .031216
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0561447{col 26}{space 2} .0022751{col 37}{space 1}   24.68{col 46}{space 3}0.000{col 54}{space 4} .0516856{col 67}{space 3} .0606038
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4233542{col 26}{space 2} .0116272{col 37}{space 1}   36.41{col 46}{space 3}0.000{col 54}{space 4}  .400565{col 67}{space 3} .4461433
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-.0908493{col 26}{space 2} .0384627{col 37}{space 1}   -2.36{col 46}{space 3}0.018{col 54}{space 4}-.1662358{col 67}{space 3}-.0154627
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .0023298{col 26}{space 2} .0444968{col 37}{space 1}    0.05{col 46}{space 3}0.958{col 54}{space 4}-.0848835{col 67}{space 3} .0895431
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000231{col 37}{space 1}  -18.17{col 46}{space 3}0.000{col 54}{space 4} -.000466{col 67}{space 3}-.0003753
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0403902{col 26}{space 2} .0064817{col 37}{space 1}    6.23{col 46}{space 3}0.000{col 54}{space 4} .0276861{col 67}{space 3} .0530943
+{txt}{space 8}dur2 {c |}{col 14}{res}{space 2} .0295438{col 26}{space 2}  .008459{col 37}{space 1}    3.49{col 46}{space 3}0.000{col 54}{space 4} .0129642{col 67}{space 3} .0461234
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.987227{col 26}{space 2} .0402745{col 37}{space 1}  173.49{col 46}{space 3}0.000{col 54}{space 4}  6.90829{col 67}{space 3} 7.066165
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F( 10, 86736) ={res} 3695.26
+    {txt}   Model {char |} {res} 17357.8413    10  1735.78413           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40742.7818 86736  .469733234           {txt}R-squared     = {res} 0.2988
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2987
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0062347{col 37}{space 1}  -88.71{col 46}{space 3}0.000{col 54}{space 4}-.5652957{col 67}{space 3} -.540856
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0017777{col 37}{space 1}   28.09{col 46}{space 3}0.000{col 54}{space 4} .0464574{col 67}{space 3}  .053426
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0032967{col 37}{space 1}    5.15{col 46}{space 3}0.000{col 54}{space 4}  .010511{col 67}{space 3} .0234338
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0012896{col 37}{space 1}   22.57{col 46}{space 3}0.000{col 54}{space 4} .0265844{col 67}{space 3} .0316397
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022341{col 37}{space 1}   25.19{col 46}{space 3}0.000{col 54}{space 4} .0518966{col 67}{space 3} .0606543
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0099672{col 37}{space 1}   42.50{col 46}{space 3}0.000{col 54}{space 4} .4040559{col 67}{space 3} .4431271
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0152116{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.0015495{col 67}{space 3} .0580798
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0229855{col 37}{space 1}    5.04{col 46}{space 3}0.000{col 54}{space 4} .0708076{col 67}{space 3} .1609102
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000222{col 37}{space 1}  -18.96{col 46}{space 3}0.000{col 54}{space 4}-.0004641{col 67}{space 3}-.0003771
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0062235{col 37}{space 1}    6.53{col 46}{space 3}0.000{col 54}{space 4}  .028424{col 67}{space 3} .0528202
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0381846{col 37}{space 1}  182.97{col 46}{space 3}0.000{col 54}{space 4} 6.911647{col 67}{space 3}  7.06133
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit septrain
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3268
+{txt}{hline 13}{char +}{hline 30}           F( 10,  3257) ={res}  155.70
+    {txt}   Model {char |} {res} 885.181167    10  88.5181167           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1851.69089  3257  .568526524           {txt}R-squared     = {res} 0.3234
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3214
+    {txt}   Total {char |} {res} 2736.87206  3267  .837732494           {txt}Root MSE      = {res} .75401
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.4274412{col 26}{space 2} .0297557{col 37}{space 1}  -14.37{col 46}{space 3}0.000{col 54}{space 4}-.4857829{col 67}{space 3}-.3690994
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0423199{col 26}{space 2} .0111501{col 37}{space 1}    3.80{col 46}{space 3}0.000{col 54}{space 4}  .020458{col 67}{space 3} .0641817
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0260905{col 26}{space 2}  .017291{col 37}{space 1}    1.51{col 46}{space 3}0.131{col 54}{space 4}-.0078119{col 67}{space 3} .0599928
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0156004{col 26}{space 2} .0030585{col 37}{space 1}    5.10{col 46}{space 3}0.000{col 54}{space 4} .0096035{col 67}{space 3} .0215972
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0753048{col 26}{space 2} .0101767{col 37}{space 1}    7.40{col 46}{space 3}0.000{col 54}{space 4} .0553515{col 67}{space 3} .0952581
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4896937{col 26}{space 2}  .055078{col 37}{space 1}    8.89{col 46}{space 3}0.000{col 54}{space 4} .3817026{col 67}{space 3} .5976847
+{txt}{space 1}2.field_cat {c |}{col 14}{res}{space 2}  .061781{col 26}{space 2} .0299885{col 37}{space 1}    2.06{col 46}{space 3}0.039{col 54}{space 4} .0029827{col 67}{space 3} .1205793
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0001488{col 26}{space 2} .0001423{col 37}{space 1}   -1.05{col 46}{space 3}0.296{col 54}{space 4}-.0004278{col 67}{space 3} .0001303
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0796412{col 26}{space 2}  .032366{col 37}{space 1}    2.46{col 46}{space 3}0.014{col 54}{space 4} .0161814{col 67}{space 3}  .143101
+{txt}{space 4}septrain {c |}{col 14}{res}{space 2}-.2579589{col 26}{space 2} .0443709{col 37}{space 1}   -5.81{col 46}{space 3}0.000{col 54}{space 4}-.3449566{col 67}{space 3}-.1709611
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.503001{col 26}{space 2} .2379535{col 37}{space 1}   27.33{col 46}{space 3}0.000{col 54}{space 4} 6.036447{col 67}{space 3} 6.969554
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86747
+{txt}{hline 13}{char +}{hline 30}           F( 10, 86736) ={res} 3695.26
+    {txt}   Model {char |} {res} 17357.8413    10  1735.78413           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40742.7818 86736  .469733234           {txt}R-squared     = {res} 0.2988
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2987
+    {txt}   Total {char |} {res} 58100.6231 86746    .6697787           {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0062347{col 37}{space 1}  -88.71{col 46}{space 3}0.000{col 54}{space 4}-.5652957{col 67}{space 3} -.540856
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0017777{col 37}{space 1}   28.09{col 46}{space 3}0.000{col 54}{space 4} .0464574{col 67}{space 3}  .053426
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0032967{col 37}{space 1}    5.15{col 46}{space 3}0.000{col 54}{space 4}  .010511{col 67}{space 3} .0234338
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0012896{col 37}{space 1}   22.57{col 46}{space 3}0.000{col 54}{space 4} .0265844{col 67}{space 3} .0316397
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022341{col 37}{space 1}   25.19{col 46}{space 3}0.000{col 54}{space 4} .0518966{col 67}{space 3} .0606543
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0099672{col 37}{space 1}   42.50{col 46}{space 3}0.000{col 54}{space 4} .4040559{col 67}{space 3} .4431271
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0152116{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.0015495{col 67}{space 3} .0580798
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0229855{col 37}{space 1}    5.04{col 46}{space 3}0.000{col 54}{space 4} .0708076{col 67}{space 3} .1609102
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000222{col 37}{space 1}  -18.96{col 46}{space 3}0.000{col 54}{space 4}-.0004641{col 67}{space 3}-.0003771
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0062235{col 37}{space 1}    6.53{col 46}{space 3}0.000{col 54}{space 4}  .028424{col 67}{space 3} .0528202
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0381846{col 37}{space 1}  182.97{col 46}{space 3}0.000{col 54}{space 4} 6.911647{col 67}{space 3}  7.06133
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat age2 marit, robust
+
+{txt}Linear regression                                      Number of obs ={res}   86747
+                                                       {txt}F( 10, 86736) ={res} 3192.90
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2988
+                                                       {txt}Root MSE      = {res} .68537
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5530758{col 26}{space 2} .0076185{col 37}{space 1}  -72.60{col 46}{space 3}0.000{col 54}{space 4} -.568008{col 67}{space 3}-.5381436
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0499417{col 26}{space 2} .0018351{col 37}{space 1}   27.22{col 46}{space 3}0.000{col 54}{space 4}  .046345{col 67}{space 3} .0535384
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0169724{col 26}{space 2} .0033491{col 37}{space 1}    5.07{col 46}{space 3}0.000{col 54}{space 4} .0104082{col 67}{space 3} .0235366
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2}  .029112{col 26}{space 2} .0014354{col 37}{space 1}   20.28{col 46}{space 3}0.000{col 54}{space 4} .0262988{col 67}{space 3} .0319253
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562754{col 26}{space 2} .0022748{col 37}{space 1}   24.74{col 46}{space 3}0.000{col 54}{space 4} .0518169{col 67}{space 3}  .060734
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4235915{col 26}{space 2} .0116279{col 37}{space 1}   36.43{col 46}{space 3}0.000{col 54}{space 4} .4008009{col 67}{space 3}  .446382
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0282651{col 26}{space 2} .0170356{col 37}{space 1}    1.66{col 46}{space 3}0.097{col 54}{space 4}-.0051246{col 67}{space 3} .0616549
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1158589{col 26}{space 2} .0264167{col 37}{space 1}    4.39{col 46}{space 3}0.000{col 54}{space 4} .0640824{col 67}{space 3} .1676354
+{txt}{space 12} {c |}
+{space 8}age2 {c |}{col 14}{res}{space 2}-.0004206{col 26}{space 2} .0000231{col 37}{space 1}  -18.17{col 46}{space 3}0.000{col 54}{space 4} -.000466{col 67}{space 3}-.0003752
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0406221{col 26}{space 2} .0064831{col 37}{space 1}    6.27{col 46}{space 3}0.000{col 54}{space 4} .0279152{col 67}{space 3}  .053329
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.986489{col 26}{space 2} .0402802{col 37}{space 1}  173.45{col 46}{space 3}0.000{col 54}{space 4}  6.90754{col 67}{space 3} 7.065437
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 9}sex {c |} {res}     1.05    0.951791
+{txt}{space 9}age {c |} {res}    63.03    0.015865
+{txt}{space 6}gedlvl {c |} {res}    22.46    0.044516
+{txt}{space 6}tedlvl {c |} {res}     1.20    0.834155
+{txt}{space 7}y_edu {c |} {res}    22.67    0.044108
+{txt}{space 8}subs {c |} {res}     1.01    0.991044
+{txt}{space 3}field_cat {c |}
+{space 10}1  {c |} {res}     1.12    0.891951
+{txt}{space 10}2  {c |} {res}     1.03    0.967399
+{txt}{space 8}age2 {c |} {res}    60.02    0.016660
+{txt}{space 7}marit {c |} {res}     1.52    0.657235
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}    17.51
+
+{com}. reg lgwage sex age gedlvl tedlvl y_edu subs i.field_cat marit, robust
+
+{txt}Linear regression                                      Number of obs ={res}   86747
+                                                       {txt}F(  9, 86737) ={res} 3474.36
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2958
+                                                       {txt}Root MSE      = {res} .68679
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}sex {c |}{col 14}{res}{space 2}-.5580448{col 26}{space 2} .0076165{col 37}{space 1}  -73.27{col 46}{space 3}0.000{col 54}{space 4}-.5729731{col 67}{space 3}-.5431165
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0165938{col 26}{space 2} .0002715{col 37}{space 1}   61.11{col 46}{space 3}0.000{col 54}{space 4} .0160616{col 67}{space 3}  .017126
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0163087{col 26}{space 2} .0033554{col 37}{space 1}    4.86{col 46}{space 3}0.000{col 54}{space 4} .0097321{col 67}{space 3} .0228852
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0291083{col 26}{space 2} .0014376{col 37}{space 1}   20.25{col 46}{space 3}0.000{col 54}{space 4} .0262906{col 67}{space 3}  .031926
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0574648{col 26}{space 2} .0022773{col 37}{space 1}   25.23{col 46}{space 3}0.000{col 54}{space 4} .0530013{col 67}{space 3} .0619283
+{txt}{space 8}subs {c |}{col 14}{res}{space 2} .4199559{col 26}{space 2} .0116658{col 37}{space 1}   36.00{col 46}{space 3}0.000{col 54}{space 4}  .397091{col 67}{space 3} .4428209
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0285274{col 26}{space 2} .0170927{col 37}{space 1}    1.67{col 46}{space 3}0.095{col 54}{space 4}-.0049742{col 67}{space 3}  .062029
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1155459{col 26}{space 2} .0263323{col 37}{space 1}    4.39{col 46}{space 3}0.000{col 54}{space 4} .0639349{col 67}{space 3} .1671569
+{txt}{space 12} {c |}
+{space 7}marit {c |}{col 14}{res}{space 2} .0807098{col 26}{space 2} .0060463{col 37}{space 1}   13.35{col 46}{space 3}0.000{col 54}{space 4} .0688591{col 67}{space 3} .0925606
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.533106{col 26}{space 2} .0279914{col 37}{space 1}  269.12{col 46}{space 3}0.000{col 54}{space 4} 7.478243{col 67}{space 3} 7.587969
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 9}sex {c |} {res}     1.05    0.953475
+{txt}{space 9}age {c |} {res}     1.35    0.739313
+{txt}{space 6}gedlvl {c |} {res}    22.46    0.044521
+{txt}{space 6}tedlvl {c |} {res}     1.20    0.834155
+{txt}{space 7}y_edu {c |} {res}    22.65    0.044142
+{txt}{space 8}subs {c |} {res}     1.01    0.991411
+{txt}{space 3}field_cat {c |}
+{space 10}1  {c |} {res}     1.12    0.891952
+{txt}{space 10}2  {c |} {res}     1.03    0.967399
+{txt}{space 7}marit {c |} {res}     1.35    0.742952
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     5.91
+
+{com}. log off
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\setti\OneDrive\Desktop\PLFS\PLFS_1.smcl
+  {txt}log type:  {res}smcl
+ {txt}paused on:  {res}21 Nov 2020, 00:13:42
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\setti\OneDrive\Desktop\PLFS\PLFS_1.smcl
+  {txt}log type:  {res}smcl
+{txt}resumed on:  {res}21 Nov 2020, 15:40:48
+
+{com}. gen gender = .
+{txt}(433339 missing values generated)
+
+{com}. replace gender = 0 if(sex == 1)
+{txt}(221743 real changes made)
+
+{com}. replace gender = 1 if(sex == 2)
+{txt}(211541 real changes made)
+
+{com}. reg lgwage gender i.field_cat age age2 marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86735
+{txt}{hline 13}{char +}{hline 30}           F(  9, 86725) ={res} 3828.92
+    {txt}   Model {char |} {res} 16520.5929     9  1835.62144           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 41576.7644 86725  .479409218           {txt}R-squared     = {res} 0.2844
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2843
+    {txt}   Total {char |} {res} 58097.3573 86734  .669833714           {txt}Root MSE      = {res} .69239
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.5640562{col 26}{space 2} .0063059{col 37}{space 1}  -89.45{col 46}{space 3}0.000{col 54}{space 4}-.5764157{col 67}{space 3}-.5516967
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0165784{col 26}{space 2}  .015365{col 37}{space 1}    1.08{col 46}{space 3}0.281{col 54}{space 4}-.0135369{col 67}{space 3} .0466937
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1159049{col 26}{space 2} .0232213{col 37}{space 1}    4.99{col 46}{space 3}0.000{col 54}{space 4} .0703914{col 67}{space 3} .1614184
+{txt}{space 12} {c |}
+{space 9}age {c |}{col 14}{res}{space 2} .0483863{col 26}{space 2} .0017957{col 37}{space 1}   26.95{col 46}{space 3}0.000{col 54}{space 4} .0448668{col 67}{space 3} .0519059
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0004016{col 26}{space 2} .0000224{col 37}{space 1}  -17.93{col 46}{space 3}0.000{col 54}{space 4}-.0004455{col 67}{space 3}-.0003577
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0383963{col 26}{space 2} .0062887{col 37}{space 1}    6.11{col 46}{space 3}0.000{col 54}{space 4} .0260705{col 67}{space 3} .0507221
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0200855{col 26}{space 2} .0033298{col 37}{space 1}    6.03{col 46}{space 3}0.000{col 54}{space 4} .0135591{col 67}{space 3} .0266118
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0291759{col 26}{space 2} .0013029{col 37}{space 1}   22.39{col 46}{space 3}0.000{col 54}{space 4} .0266222{col 67}{space 3} .0317296
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0557057{col 26}{space 2} .0022571{col 37}{space 1}   24.68{col 46}{space 3}0.000{col 54}{space 4} .0512818{col 67}{space 3} .0601295
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.272833{col 26}{space 2} .0319305{col 37}{space 1}  227.77{col 46}{space 3}0.000{col 54}{space 4}  7.21025{col 67}{space 3} 7.335417
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage gender i.field_cat subs age age2 marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86735
+{txt}{hline 13}{char +}{hline 30}           F( 10, 86724) ={res} 3698.14
+    {txt}   Model {char |} {res} 17368.0621    10  1736.80621           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40729.2952 86724   .46964272           {txt}R-squared     = {res} 0.2989
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2989
+    {txt}   Total {char |} {res} 58097.3573 86734  .669833714           {txt}Root MSE      = {res}  .6853
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.5548525{col 26}{space 2} .0062451{col 37}{space 1}  -88.85{col 46}{space 3}0.000{col 54}{space 4}-.5670929{col 67}{space 3}-.5426122
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0286239{col 26}{space 2} .0152104{col 37}{space 1}    1.88{col 46}{space 3}0.060{col 54}{space 4}-.0011882{col 67}{space 3} .0584361
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1164317{col 26}{space 2} .0229835{col 37}{space 1}    5.07{col 46}{space 3}0.000{col 54}{space 4} .0713841{col 67}{space 3} .1614792
+{txt}{space 12} {c |}
+{space 8}subs {c |}{col 14}{res}{space 2} .4233645{col 26}{space 2} .0099664{col 37}{space 1}   42.48{col 46}{space 3}0.000{col 54}{space 4} .4038305{col 67}{space 3} .4428985
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0498659{col 26}{space 2} .0017777{col 37}{space 1}   28.05{col 46}{space 3}0.000{col 54}{space 4} .0463817{col 67}{space 3} .0533501
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0004198{col 26}{space 2} .0000222{col 37}{space 1}  -18.93{col 46}{space 3}0.000{col 54}{space 4}-.0004632{col 67}{space 3}-.0003763
+{txt}{space 7}marit {c |}{col 14}{res}{space 2} .0412027{col 26}{space 2} .0062247{col 37}{space 1}    6.62{col 46}{space 3}0.000{col 54}{space 4} .0290024{col 67}{space 3} .0534031
+{txt}{space 6}gedlvl {c |}{col 14}{res}{space 2} .0170403{col 26}{space 2} .0032965{col 37}{space 1}    5.17{col 46}{space 3}0.000{col 54}{space 4} .0105792{col 67}{space 3} .0235013
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0291142{col 26}{space 2} .0012896{col 37}{space 1}   22.58{col 46}{space 3}0.000{col 54}{space 4} .0265867{col 67}{space 3} .0316417
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562236{col 26}{space 2}  .002234{col 37}{space 1}   25.17{col 46}{space 3}0.000{col 54}{space 4}  .051845{col 67}{space 3} .0606022
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.434461{col 26}{space 2} .0372598{col 37}{space 1}  172.69{col 46}{space 3}0.000{col 54}{space 4} 6.361432{col 67}{space 3}  6.50749
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage gender i.field_cat subs age age2 i.marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86735
+{txt}{hline 13}{char +}{hline 30}           F( 12, 86722) ={res} 3083.51
+    {txt}   Model {char |} {res}  17375.168    12  1447.93067           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40722.1893 86722  .469571612           {txt}R-squared     = {res} 0.2991
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2990
+    {txt}   Total {char |} {res} 58097.3573 86734  .669833714           {txt}Root MSE      = {res} .68525
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.5598555{col 26}{space 2} .0064573{col 37}{space 1}  -86.70{col 46}{space 3}0.000{col 54}{space 4}-.5725117{col 67}{space 3}-.5471993
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0285537{col 26}{space 2} .0152112{col 37}{space 1}    1.88{col 46}{space 3}0.061{col 54}{space 4}-.0012602{col 67}{space 3} .0583676
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1171999{col 26}{space 2} .0229832{col 37}{space 1}    5.10{col 46}{space 3}0.000{col 54}{space 4} .0721531{col 67}{space 3} .1622467
+{txt}{space 12} {c |}
+{space 8}subs {c |}{col 14}{res}{space 2} .4229107{col 26}{space 2} .0099709{col 37}{space 1}   42.41{col 46}{space 3}0.000{col 54}{space 4} .4033679{col 67}{space 3} .4424535
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0507419{col 26}{space 2} .0018662{col 37}{space 1}   27.19{col 46}{space 3}0.000{col 54}{space 4} .0470842{col 67}{space 3} .0543997
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0004306{col 26}{space 2} .0000231{col 37}{space 1}  -18.66{col 46}{space 3}0.000{col 54}{space 4}-.0004758{col 67}{space 3}-.0003853
+{txt}{space 12} {c |}
+{space 7}marit {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0337396{col 26}{space 2} .0081999{col 37}{space 1}    4.11{col 46}{space 3}0.000{col 54}{space 4} .0176678{col 67}{space 3} .0498115
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .1182957{col 26}{space 2} .0155373{col 37}{space 1}    7.61{col 46}{space 3}0.000{col 54}{space 4} .0878428{col 67}{space 3} .1487486
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .0665694{col 26}{space 2} .0291586{col 37}{space 1}    2.28{col 46}{space 3}0.022{col 54}{space 4} .0094188{col 67}{space 3} .1237199
+{txt}{space 12} {c |}
+{space 6}gedlvl {c |}{col 14}{res}{space 2} .0171265{col 26}{space 2} .0032963{col 37}{space 1}    5.20{col 46}{space 3}0.000{col 54}{space 4} .0106657{col 67}{space 3} .0235872
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0290958{col 26}{space 2} .0012895{col 37}{space 1}   22.56{col 46}{space 3}0.000{col 54}{space 4} .0265685{col 67}{space 3} .0316232
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562861{col 26}{space 2} .0022339{col 37}{space 1}   25.20{col 46}{space 3}0.000{col 54}{space 4} .0519077{col 67}{space 3} .0606645
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.464713{col 26}{space 2} .0388912{col 37}{space 1}  166.23{col 46}{space 3}0.000{col 54}{space 4} 6.388486{col 67}{space 3} 6.540939
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage gender i.field_cat subs age i.marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86735
+{txt}{hline 13}{char +}{hline 30}           F( 11, 86723) ={res} 3318.90
+    {txt}   Model {char |} {res} 17211.6795    11  1564.69814           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40885.6778 86723  .471451377           {txt}R-squared     = {res} 0.2963
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2962
+    {txt}   Total {char |} {res} 58097.3573 86734  .669833714           {txt}Root MSE      = {res} .68662
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2} -.556954{col 26}{space 2} .0064683{col 37}{space 1}  -86.11{col 46}{space 3}0.000{col 54}{space 4}-.5696318{col 67}{space 3}-.5442761
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0300029{col 26}{space 2} .0152415{col 37}{space 1}    1.97{col 46}{space 3}0.049{col 54}{space 4} .0001297{col 67}{space 3}  .059876
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1171935{col 26}{space 2} .0230291{col 37}{space 1}    5.09{col 46}{space 3}0.000{col 54}{space 4} .0720566{col 67}{space 3} .1623303
+{txt}{space 12} {c |}
+{space 8}subs {c |}{col 14}{res}{space 2}  .421134{col 26}{space 2} .0099904{col 37}{space 1}   42.15{col 46}{space 3}0.000{col 54}{space 4}  .401553{col 67}{space 3}  .440715
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0162817{col 26}{space 2} .0002689{col 37}{space 1}   60.55{col 46}{space 3}0.000{col 54}{space 4} .0157547{col 67}{space 3} .0168087
+{txt}{space 12} {c |}
+{space 7}marit {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0990886{col 26}{space 2} .0074292{col 37}{space 1}   13.34{col 46}{space 3}0.000{col 54}{space 4} .0845274{col 67}{space 3} .1136499
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .1787178{col 26}{space 2} .0152265{col 37}{space 1}   11.74{col 46}{space 3}0.000{col 54}{space 4} .1488741{col 67}{space 3} .2085615
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .1347141{col 26}{space 2} .0289868{col 37}{space 1}    4.65{col 46}{space 3}0.000{col 54}{space 4} .0779002{col 67}{space 3}  .191528
+{txt}{space 12} {c |}
+{space 6}gedlvl {c |}{col 14}{res}{space 2} .0164853{col 26}{space 2} .0033027{col 37}{space 1}    4.99{col 46}{space 3}0.000{col 54}{space 4}  .010012{col 67}{space 3} .0229586
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0291263{col 26}{space 2} .0012921{col 37}{space 1}   22.54{col 46}{space 3}0.000{col 54}{space 4} .0265939{col 67}{space 3} .0316587
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0573773{col 26}{space 2} .0022376{col 37}{space 1}   25.64{col 46}{space 3}0.000{col 54}{space 4} .0529917{col 67}{space 3}  .061763
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.050111{col 26}{space 2} .0230296{col 37}{space 1}  306.13{col 46}{space 3}0.000{col 54}{space 4} 7.004973{col 67}{space 3} 7.095249
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 6}gender {c |} {res}     1.12    0.890301
+{txt}{space 3}field_cat {c |}
+{space 10}1  {c |} {res}     1.12    0.891715
+{txt}{space 10}2  {c |} {res}     1.03    0.967260
+{txt}{space 8}subs {c |} {res}     1.01    0.990071
+{txt}{space 9}age {c |} {res}     1.44    0.696093
+{txt}{space 7}marit {c |}
+{space 10}2  {c |} {res}     1.65    0.605556
+{txt}{space 10}3  {c |} {res}     1.47    0.679008
+{txt}{space 10}4  {c |} {res}     1.07    0.938565
+{txt}{space 6}gedlvl {c |} {res}    22.46    0.044518
+{txt}{space 6}tedlvl {c |} {res}     1.20    0.834132
+{txt}{space 7}y_edu {c |} {res}    22.66    0.044135
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}     5.11
+
+{com}. estat hettest
+
+{txt}Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+{p 9 20}Variables: fitted values of lgwage
+
+{col 10}chi2({res}1{txt}){col 23}={res}    92.67
+{txt}{col 10}Prob > chi2{col 23}={res}   0.0000
+
+{com}. reg lgwage gender i.field_cat subs age i.marit gedlvl tedlvl y_edu, robust
+
+{txt}Linear regression                                      Number of obs ={res}   86735
+                                                       {txt}F( 11, 86723) ={res} 2859.37
+                                                       {txt}Prob > F      = {res} 0.0000
+                                                       {txt}R-squared     = {res} 0.2963
+                                                       {txt}Root MSE      = {res} .68662
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2} -.556954{col 26}{space 2} .0080064{col 37}{space 1}  -69.56{col 46}{space 3}0.000{col 54}{space 4}-.5726465{col 67}{space 3}-.5412615
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0300029{col 26}{space 2} .0170807{col 37}{space 1}    1.76{col 46}{space 3}0.079{col 54}{space 4}-.0034751{col 67}{space 3} .0634808
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1171935{col 26}{space 2} .0263322{col 37}{space 1}    4.45{col 46}{space 3}0.000{col 54}{space 4} .0655826{col 67}{space 3} .1688043
+{txt}{space 12} {c |}
+{space 8}subs {c |}{col 14}{res}{space 2}  .421134{col 26}{space 2} .0116683{col 37}{space 1}   36.09{col 46}{space 3}0.000{col 54}{space 4} .3982643{col 67}{space 3} .4440038
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0162817{col 26}{space 2} .0002791{col 37}{space 1}   58.34{col 46}{space 3}0.000{col 54}{space 4} .0157347{col 67}{space 3} .0168287
+{txt}{space 12} {c |}
+{space 7}marit {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0990886{col 26}{space 2} .0072798{col 37}{space 1}   13.61{col 46}{space 3}0.000{col 54}{space 4} .0848202{col 67}{space 3}  .113357
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .1787178{col 26}{space 2} .0169535{col 37}{space 1}   10.54{col 46}{space 3}0.000{col 54}{space 4} .1454891{col 67}{space 3} .2119465
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .1347141{col 26}{space 2} .0308828{col 37}{space 1}    4.36{col 46}{space 3}0.000{col 54}{space 4}  .074184{col 67}{space 3} .1952442
+{txt}{space 12} {c |}
+{space 6}gedlvl {c |}{col 14}{res}{space 2} .0164853{col 26}{space 2} .0033548{col 37}{space 1}    4.91{col 46}{space 3}0.000{col 54}{space 4}   .00991{col 67}{space 3} .0230606
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0291263{col 26}{space 2} .0014367{col 37}{space 1}   20.27{col 46}{space 3}0.000{col 54}{space 4} .0263104{col 67}{space 3} .0319421
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0573773{col 26}{space 2} .0022762{col 37}{space 1}   25.21{col 46}{space 3}0.000{col 54}{space 4}  .052916{col 67}{space 3} .0618387
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.050111{col 26}{space 2} .0259371{col 37}{space 1}  271.82{col 46}{space 3}0.000{col 54}{space 4} 6.999274{col 67}{space 3} 7.100947
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg lgwage gender i.field_cat subs age age2 i.marit gedlvl tedlvl y_edu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}   86735
+{txt}{hline 13}{char +}{hline 30}           F( 12, 86722) ={res} 3083.51
+    {txt}   Model {char |} {res}  17375.168    12  1447.93067           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 40722.1893 86722  .469571612           {txt}R-squared     = {res} 0.2991
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2990
+    {txt}   Total {char |} {res} 58097.3573 86734  .669833714           {txt}Root MSE      = {res} .68525
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      lgwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.5598555{col 26}{space 2} .0064573{col 37}{space 1}  -86.70{col 46}{space 3}0.000{col 54}{space 4}-.5725117{col 67}{space 3}-.5471993
+{txt}{space 12} {c |}
+{space 3}field_cat {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0285537{col 26}{space 2} .0152112{col 37}{space 1}    1.88{col 46}{space 3}0.061{col 54}{space 4}-.0012602{col 67}{space 3} .0583676
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .1171999{col 26}{space 2} .0229832{col 37}{space 1}    5.10{col 46}{space 3}0.000{col 54}{space 4} .0721531{col 67}{space 3} .1622467
+{txt}{space 12} {c |}
+{space 8}subs {c |}{col 14}{res}{space 2} .4229107{col 26}{space 2} .0099709{col 37}{space 1}   42.41{col 46}{space 3}0.000{col 54}{space 4} .4033679{col 67}{space 3} .4424535
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0507419{col 26}{space 2} .0018662{col 37}{space 1}   27.19{col 46}{space 3}0.000{col 54}{space 4} .0470842{col 67}{space 3} .0543997
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0004306{col 26}{space 2} .0000231{col 37}{space 1}  -18.66{col 46}{space 3}0.000{col 54}{space 4}-.0004758{col 67}{space 3}-.0003853
+{txt}{space 12} {c |}
+{space 7}marit {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0337396{col 26}{space 2} .0081999{col 37}{space 1}    4.11{col 46}{space 3}0.000{col 54}{space 4} .0176678{col 67}{space 3} .0498115
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .1182957{col 26}{space 2} .0155373{col 37}{space 1}    7.61{col 46}{space 3}0.000{col 54}{space 4} .0878428{col 67}{space 3} .1487486
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .0665694{col 26}{space 2} .0291586{col 37}{space 1}    2.28{col 46}{space 3}0.022{col 54}{space 4} .0094188{col 67}{space 3} .1237199
+{txt}{space 12} {c |}
+{space 6}gedlvl {c |}{col 14}{res}{space 2} .0171265{col 26}{space 2} .0032963{col 37}{space 1}    5.20{col 46}{space 3}0.000{col 54}{space 4} .0106657{col 67}{space 3} .0235872
+{txt}{space 6}tedlvl {c |}{col 14}{res}{space 2} .0290958{col 26}{space 2} .0012895{col 37}{space 1}   22.56{col 46}{space 3}0.000{col 54}{space 4} .0265685{col 67}{space 3} .0316232
+{txt}{space 7}y_edu {c |}{col 14}{res}{space 2} .0562861{col 26}{space 2} .0022339{col 37}{space 1}   25.20{col 46}{space 3}0.000{col 54}{space 4} .0519077{col 67}{space 3} .0606645
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.464713{col 26}{space 2} .0388912{col 37}{space 1}  166.23{col 46}{space 3}0.000{col 54}{space 4} 6.388486{col 67}{space 3} 6.540939
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. vif
+
+{txt}    Variable {c |}       VIF       1/VIF  
+{hline 13}{c +}{hline 22}
+{space 6}gender {c |} {res}     1.12    0.889785
+{txt}{space 3}field_cat {c |}
+{space 10}1  {c |} {res}     1.12    0.891691
+{txt}{space 10}2  {c |} {res}     1.03    0.967260
+{txt}{space 8}subs {c |} {res}     1.01    0.989981
+{txt}{space 9}age {c |} {res}    69.48    0.014392
+{txt}{space 8}age2 {c |} {res}    64.99    0.015387
+{txt}{space 7}marit {c |}
+{space 10}2  {c |} {res}     2.02    0.495091
+{txt}{space 10}3  {c |} {res}     1.54    0.649514
+{txt}{space 10}4  {c |} {res}     1.08    0.923842
+{txt}{space 6}gedlvl {c |} {res}    22.47    0.044513
+{txt}{space 6}tedlvl {c |} {res}     1.20    0.834130
+{txt}{space 7}y_edu {c |} {res}    22.67    0.044104
+{txt}{hline 13}{c +}{hline 22}
+    Mean VIF {c |} {res}    15.81
+
+{com}. desc rat
+
+              {txt}storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:rat            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+
+{com}. sum rat
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 9}rat {c |}{res}    433339    .2735875           0   .2735875   .2735875
+
+{com}. tab rate
+{err}variable rate not found
+{txt}{search r(111):r(111);}
+
+{com}. tab rat
+
+        {txt}rat {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+   .2735875 {c |}{res}    433,339      100.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    433,339      100.00
+
+{com}. 
